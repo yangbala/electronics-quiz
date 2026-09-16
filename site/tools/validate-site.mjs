@@ -33,7 +33,7 @@ assert(index.includes('src="data/other-questions.js"'), "data/other-questions.js
 assert(index.includes('src="data/chapter4-remaining.js"'), "data/chapter4-remaining.js is not loaded");
 assert(index.includes('src="data/chapter6-questions.js"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js"'), "data/chapter7-questions.js is not loaded");
-assert(index.includes('src="data/chapter3-questions.js?v=5"'), "data/chapter3-questions.js is not loaded");
+assert(index.includes('src="data/chapter3-questions.js?v=6"'), "data/chapter3-questions.js is not loaded");
 
 const chapter3Answers={"112-27":"C","114-26":"B","115-1":"B"};
 for(const [id,answer] of Object.entries(chapter3Answers)){

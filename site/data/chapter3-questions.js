@@ -87,20 +87,24 @@ const chapter3Questions = {
     key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${q.blanks.slice(0,blankLimit()).map(item=>`<li><b>${item.label}【標準答案】：${item.answer.split("|")[0]}</b><br><span>【思維線索（Why）】：${item.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${q.self}</div>`;
     window.MathJax?.typesetPromise?.([key]);
   }
-  const previousRender=render;
+  const chapterGoals={
+    1:["觀念辨識","從選項辨認半導體核心概念。","訓練目標：辨認基本名詞、材料型別與正確敘述。"],
+    2:["少量填空","完整保留推理，只挖空 3 個核心物理關係。","訓練目標：在高度鷹架下辨認模型、守恆關係與關鍵結論。"],
+    3:["中量填空","完整保留推理，增加為 4 個關鍵空格。","訓練目標：串聯摻雜、載子與電中性的因果關係。"],
+    4:["大量填空","完整保留代數與逐項判斷，自行完成 5 個關鍵空格。","訓練目標：獨立完成物理建模、定律判斷、近似與結論提煉。"]
+  };
   function renderChapter3(){
-    previousRender();
-    const chapterGoals={
-      1:["觀念辨識","從選項辨認半導體核心概念。","訓練目標：辨認基本名詞、材料型別與正確敘述。"],
-      2:["少量填空","完整保留推理，只挖空 3 個核心物理關係。","訓練目標：在高度鷹架下辨認模型、守恆關係與關鍵結論。"],
-      3:["中量填空","完整保留推理，增加為 4 個關鍵空格。","訓練目標：串聯摻雜、載子與電中性的因果關係。"],
-      4:["大量填空","完整保留代數與逐項判斷，自行完成 5 個關鍵空格。","訓練目標：獨立完成物理建模、定律判斷、近似與結論提煉。"]
-    };
     const [note,help,goal]=chapterGoals[level];
+    document.getElementById("levelName").textContent=`等級 ${level}`;
     document.getElementById("levelNote").textContent=note;
     document.getElementById("workTitle").textContent=`等級 ${level}・${note}`;
     document.getElementById("workHelp").textContent=help;
     document.getElementById("levelGoal").textContent=goal;
+    document.getElementById("tabs").innerHTML=Object.entries(chapterGoals).map(([number,item])=>`<button class="level ${level===Number(number)?"active":""}" data-level="${number}"><strong>等級 ${number}</strong><span>${item[0]}</span></button>`).join("");
+    document.getElementById("answerArea").innerHTML=content();
+    document.getElementById("result").innerHTML="";
+    document.querySelectorAll(".level").forEach(button=>button.onclick=()=>{const params=new URLSearchParams(location.search);params.set("level",button.dataset.level);location.search=params.toString()});
+    document.querySelectorAll(".choice").forEach(button=>button.onclick=()=>{document.querySelectorAll(".choice").forEach(item=>item.classList.remove("selected"));button.classList.add("selected")});
     document.querySelector(".meta .tag:first-child").textContent=`${q.year} 年第 ${q.number} 題`;
     document.querySelector(".meta .tag:last-child").textContent=q.topic;
     const img=document.querySelector(".imageWrap img");
@@ -109,6 +113,8 @@ const chapter3Questions = {
     img.alt=`${id} 原始試題切圖`;
     const nav=document.getElementById("questionTabs");
     if(nav)nav.innerHTML=Object.keys(chapter3Questions).map(key=>`<button class="chapterQuestion ${key===id?"active":""}" onclick="location.href='?id=${key}'">${key}</button>`).join("");
+    if(typeof renderStats==="function")renderStats();
+    if(window.MathJax?.typesetPromise){window.MathJax.typesetClear?.([document.getElementById("answerArea")]);window.MathJax.typesetPromise([document.getElementById("answerArea")]);}
   }
   render=renderChapter3;
   document.getElementById("check").onclick=()=>{
