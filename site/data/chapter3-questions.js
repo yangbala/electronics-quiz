@@ -109,6 +109,7 @@ const chapter3Questions = {
     if(nav)nav.innerHTML=Object.keys(chapter3Questions).map(key=>`<button class="chapterQuestion ${key===id?"active":""}" onclick="location.href='?id=${key}'">${key}</button>`).join("");
   }
   render=renderChapter3;
+  window.customLevelRender=renderChapter3;
   document.getElementById("tabs").addEventListener("click",event=>{
     const button=event.target.closest(".level");
     if(!button)return;
