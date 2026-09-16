@@ -107,9 +107,16 @@ const chapter3Questions = {
     img.alt=`${id} 原始試題切圖`;
     const nav=document.getElementById("questionTabs");
     if(nav)nav.innerHTML=Object.keys(chapter3Questions).map(key=>`<button class="chapterQuestion ${key===id?"active":""}" onclick="location.href='?id=${key}'">${key}</button>`).join("");
-    document.querySelectorAll(".level").forEach(button=>button.onclick=()=>{level=Number(button.dataset.level);renderChapter3()});
   }
   render=renderChapter3;
+  document.getElementById("tabs").addEventListener("click",event=>{
+    const button=event.target.closest(".level");
+    if(!button)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    level=Number(button.dataset.level);
+    renderChapter3();
+  },true);
   document.getElementById("check").onclick=()=>{
     if(level===1){
       const picked=document.querySelector(".choice.selected");
