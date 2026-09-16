@@ -28,7 +28,7 @@ String.raw`<b>③ 求零偏壓轉移電導</b><br>\(g_{m0}=\dfrac{2I_{DSS}}{|V_P
 String.raw`<b>④ 求工作點轉移電導</b><br>\(g_m=g_{m0}\left(1-\dfrac{V_{GS}}{V_P}\right)=5\left(1-\dfrac{-2}{-4}\right)={{2.5|mS}}\)。`,
 String.raw`<b>⑤ 求中頻電壓增益</b><br>\(A_v=-g_mR_D=-(2.5\,\mathrm{mS})(3\,\mathrm{k}\Omega)={{-7.5|—}}\)，故選 D。`,
 String.raw`<b>⑥ 以汲極電流驗證</b><br>\(I_D=I_{DSS}(1-V_{GS}/V_P)^2=10(1-0.5)^2={{2.5|mA}}\)，且 \(g_m=2I_D/(V_{GS}-V_P)=5/2={{2.5|mS}}\)，與前式一致。`]}}
-(function(){Object.assign(chapter7Questions,{
+;(function(){Object.assign(chapter7Questions,{
 "113-36":{year:113,number:36,topic:"JFET 共源極放大器電壓增益",answer:"A",choices:["−1.28","−1.86","−2.25","−3.25"],counts:[3,6,10],steps:[
 String.raw`<b>① 由汲源電壓求工作點電流</b><br>\(V_{DS}=15-I_D(R_D+R_S)\)，故 \(7.5=15-I_D(2+1)\)，得到 \(I_D={{2.5|mA}}\)。`,
 String.raw`<b>② 求工作點轉移電導</b><br>\(g_m=\dfrac{2}{|V_P|}\sqrt{I_{DSS}I_D}=\dfrac{2}{3}\sqrt{10\times2.5}={{3.333|mS}}\)。`,
@@ -122,7 +122,7 @@ String.raw`<b>⑦ 反向檢查</b><br>若量在耦合電容左側才會看見 \(
 ;
 (function activateChapter7(){
 const id=new URLSearchParams(location.search).get("id"),q=chapter7Questions[id];if(!q)return;
-const cropRoot="assets/chapter7/";
+const cropRoot="file:///C:/Users/Eli/.codex/visualizations/2026/08/13/019ffba4-80b5-7ed3-a9a4-ee902d86127c/chapter7_questions/";
 const norm=v=>v.trim().replace(/,/g,"").replace(/−/g,"-").replace(/\s/g,"").toLowerCase();
 const unitAliases={V:["v","伏特"],mV:["mv","毫伏","毫伏特"],mA:["ma","毫安","毫安培"],"µA":["µa","μa","ua","微安","微安培"],A:["a","安培"],mS:["ms","毫西門子"],Ω:["ω","Ω","ohm","ohms","歐","歐姆"],"kΩ":["kω","kΩ","kohm","kohms","千歐","千歐姆"],格:["格","div","division"],"—":[""]};
 function solution(){let token=0,limit=q.counts[level-2];return `<div class="steps">${q.steps.map(step=>`<div class="step">${step.replace(/\{\{(.*?)\|(.*?)\}\}/g,(_,answer,unit,offset)=>{token++;const prefix=step.slice(0,offset),inMath=prefix.lastIndexOf("\\(")>prefix.lastIndexOf("\\)");const fixed=`<strong>${answer}</strong>${unit==="—"?"":` <span class="answerUnit">${unit}</span>`}`;const field=`<span class="blankRef">${token}</span><span class="answerPair"><input class="blank" data-answer="${answer}" placeholder="數值／文字">${unit==="—"?`<span class="dimensionless">無單位</span>`:`<input class="unitInput" data-unit="${unit}" placeholder="${unit}">`}</span>`;const rendered=token>limit?fixed:field;return inMath?`\\) ${rendered} \\(`:rendered})}</div>`).join("")}</div>`}
