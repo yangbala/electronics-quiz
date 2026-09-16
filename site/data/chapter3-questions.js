@@ -59,6 +59,8 @@ const chapter3Questions = {
   const id=new URLSearchParams(location.search).get("id");
   const q=chapter3Questions[id];
   if(!q)return;
+  const requestedLevel=Number(new URLSearchParams(location.search).get("level"));
+  if([1,2,3,4].includes(requestedLevel))level=requestedLevel;
   const blankLimit=()=>({2:3,3:4,4:5}[level]||0);
   const normalize=value=>value.trim().replace(/\s+/g,"").toLowerCase();
   function scaffold(){
@@ -109,15 +111,6 @@ const chapter3Questions = {
     if(nav)nav.innerHTML=Object.keys(chapter3Questions).map(key=>`<button class="chapterQuestion ${key===id?"active":""}" onclick="location.href='?id=${key}'">${key}</button>`).join("");
   }
   render=renderChapter3;
-  window.customLevelRender=renderChapter3;
-  document.getElementById("tabs").addEventListener("click",event=>{
-    const button=event.target.closest(".level");
-    if(!button)return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    level=Number(button.dataset.level);
-    renderChapter3();
-  },true);
   document.getElementById("check").onclick=()=>{
     if(level===1){
       const picked=document.querySelector(".choice.selected");
