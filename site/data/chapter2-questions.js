@@ -129,10 +129,19 @@ const chapter2Questions = {
   if([1,2,3,4].includes(requested))level=requested;
   const limit=()=>({2:3,3:4,4:5}[level]||0);
   const normalize=s=>s.trim().replace(/\\s+/g,"").replace(/[ΩΩ]/g,"ohm").replace(/µ/g,"u").toLowerCase();
-  const replace=html=>html.replace(/\{\{(\d+)\}\}/g,(_,i)=>{
+  const mathContext=(html,offset)=>{
+    const before=html.slice(0,offset);
+    const inlineOpen=(before.match(/\\\(/g)||[]).length>(before.match(/\\\)/g)||[]).length;
+    const displayOpen=(before.match(/\\\[/g)||[]).length>(before.match(/\\\]/g)||[]).length;
+    return inlineOpen?"inline":displayOpen?"display":null;
+  };
+  const replace=html=>html.replace(/\{\{(\d+)\}\}/g,(_,i,offset)=>{
     const n=Number(i), item=q.blanks[n];
-    if(n>=limit())return `<strong>\\(${item.a.split("|")[0]}\\)</strong>`;
-    return `<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;
+    const markup=n>=limit()?`<strong>\\(${item.a.split("|")[0]}\\)</strong>`:`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;
+    const context=mathContext(html,offset);
+    if(context==="inline")return `\\)${markup}\\(`;
+    if(context==="display")return `\\]${markup}\\[`;
+    return markup;
   });
   const goals={
     1:["觀念辨識","從選項判斷答案，先辨認電路型態與關鍵定律。","訓練目標：看懂題意、辨認理想運放與回授型態。"],
