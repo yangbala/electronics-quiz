@@ -5,6 +5,7 @@ const root = path.resolve(import.meta.dirname, "..");
 const index = fs.readFileSync(path.join(root, "quiz.html"), "utf8");
 const extra = fs.readFileSync(path.join(root, "data", "other-questions.js"), "utf8");
 const chapter4 = fs.readFileSync(path.join(root, "data", "chapter4-remaining.js"), "utf8");
+const chapter5CLT1 = fs.readFileSync(path.join(root, "data", "chapter5-clt-batch1.js"), "utf8");
 const chapter6 = fs.readFileSync(path.join(root, "data", "chapter6-questions.js"), "utf8");
 const chapter7 = fs.readFileSync(path.join(root, "data", "chapter7-questions.js"), "utf8");
 const chapter7Page = fs.readFileSync(path.join(root, "chapters", "chapter-7.html"), "utf8");
@@ -22,6 +23,7 @@ for (const [i, script] of inlineScripts.entries()) {
 }
 try { new Function(extra); } catch (error) { errors.push(`other-questions.js: ${error.message}`); }
 try { new Function(chapter4); } catch (error) { errors.push(`chapter4-remaining.js: ${error.message}`); }
+try { new Function(chapter5CLT1); } catch (error) { errors.push(`chapter5-clt-batch1.js: ${error.message}`); }
 try { new Function(chapter6); } catch (error) { errors.push(`chapter6-questions.js: ${error.message}`); }
 try { new Function(chapter7); } catch (error) { errors.push(`chapter7-questions.js: ${error.message}`); }
 try { new Function(chapter3); } catch (error) { errors.push(`chapter3-questions.js: ${error.message}`); }
@@ -31,6 +33,7 @@ assert(index.includes("MathJax"), "MathJax configuration missing");
 assert(index.includes("tex-svg.js"), "MathJax renderer missing");
 assert(index.includes('src="data/other-questions.js?v=4"'), "data/other-questions.js is not loaded");
 assert(index.includes('src="data/chapter4-remaining.js?v=5"'), "data/chapter4-remaining.js is not loaded");
+assert(index.includes('src="data/chapter5-clt-batch1.js?v=1"'), "data/chapter5-clt-batch1.js is not loaded");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=2"'), "data/chapter7-questions.js is not loaded");
 assert(index.includes('src="data/chapter3-questions.js?v=6"'), "data/chapter3-questions.js is not loaded");
@@ -63,6 +66,10 @@ for (const id of chapter4Ids) {
   const image = path.resolve("C:/Users/Eli/.codex/visualizations/2026/08/13/019ffba4-80b5-7ed3-a9a4-ee902d86127c/chapter4_questions", `${id}.png`);
   assert(fs.existsSync(image), `${id}: crop image missing`);
 }
+const chapter5CLT1Ids=["111-35","111-48","112-32","112-33","112-34"];
+for(const id of chapter5CLT1Ids){assert(chapter5CLT1.includes(`"${id}":{`),`${id}: Chapter 5 CLT batch 1 record missing`)}
+assert((chapter5CLT1.match(/label:"[①②③④⑤]"/g)||[]).length===25,"Chapter 5 CLT batch 1 must provide five blanks per question");
+assert((chapter5CLT1.match(/Faded Step to Independence/g)||[]).length===1,"Chapter 5 CLT batch 1 shared migration renderer missing");
 assert((chapter4.match(/<b>⑥/g) || []).length === 10, "remaining Chapter 4 questions must each contain six complete steps");
 for (const [id, answer] of Object.entries({"112-28":"A","112-45":"D","113-26":"A","113-43":"D","113-44":"D","114-27":"C","114-28":"D","114-42":"A","115-27":"C","115-44":"B"})) {
   const escaped=id.replace("-","\\-");
