@@ -46,6 +46,18 @@ derivation:String.raw`<b>步驟 1：直流工作點</b>\[I_D=\frac{15-10.6}{2.2\
 self:"本題為什麼必須在算出 \(R_S\) 後再檢查飽和區，而不能一開始就把平方律視為必然成立？",challenge:String.raw`若指定 \(V_D=8.4\,V\)，其他條件不變，重新設計 \(R_S\)。<br><b>第一步提示：</b>先由汲極支路重算 \(I_D\)。`}
 };
 
+const chapter5StatsKey="electronicsQuizStatsV1";
+function loadChapter5Stats(){try{return JSON.parse(localStorage.getItem(chapter5StatsKey))||{attempts:[]}}catch{return{attempts:[]}}}
+function renderChapter5Stats(){
+  const host=document.getElementById("statsContent");if(!host)return;const rows=loadChapter5Stats().attempts;
+  if(!rows.length){host.innerHTML='<div class="advice">完成一次作答後，這裡會分析關鍵關係、單位與各等級表現。</div>';return}
+  const total=rows.reduce((s,x)=>s+x.total,0),right=rows.reduce((s,x)=>s+x.right,0),ut=rows.reduce((s,x)=>s+x.unitTotal,0),ur=rows.reduce((s,x)=>s+x.unitRight,0),pct=(n,d)=>d?Math.round(n/d*100)+"%":"—";
+  const byLevel=[1,2,3,4].map(n=>{const a=rows.filter(x=>x.level===n);return pct(a.reduce((s,x)=>s+x.right,0),a.reduce((s,x)=>s+x.total,0))});
+  let advice="目前關鍵關係與單位都很穩定，可以挑戰更高等級。";if(ut&&ur/ut<.8)advice="單位正確率較低：下一輪請在計算後主動核對 V、mA、kΩ、mA/V 或 mA/V²。";else if(total&&right/total<.8)advice="關鍵關係正確率需要加強：建議降低一級，先確認工作區、控制變數與首行方程式。";
+  host.innerHTML=`<div class="statsGrid"><div class="metric"><strong>${rows.length}</strong><span>作答次數</span></div><div class="metric"><strong>${pct(right,total)}</strong><span>關鍵關係正確率</span></div><div class="metric"><strong>${pct(ur,ut)}</strong><span>單位答案正確率</span></div><div class="metric"><strong>${byLevel.map((v,i)=>`L${i+1} ${v}`).join(" · ")}</strong><span>各等級表現</span></div></div><div class="advice"><b>個人化建議：</b>${advice}</div>`;
+}
+function saveChapter5Attempt(data){try{const stats=loadChapter5Stats();stats.attempts.push({...data,time:Date.now()});localStorage.setItem(chapter5StatsKey,JSON.stringify(stats))}catch{}renderChapter5Stats()}
+
 function activateChapter5CLTBatch(map){
   const params=new URLSearchParams(location.search),id=params.get("id"),q=map[id];
   if(!q)return;
@@ -59,9 +71,10 @@ function activateChapter5CLTBatch(map){
   const baseRender=render;render=function(){baseRender();if(window.MathJax?.typesetPromise){window.MathJax.typesetClear?.([$("answerArea")]);window.MathJax.typesetPromise([$("answerArea")])}};
   document.getElementById("check").onclick=()=>{
     const source=chapter5Questions[id];
-    if(level===1){const picked=document.querySelector(".choice.selected");if(!picked){show(false,"請先選擇答案。");return}const ok=picked.dataset.value===source.answer;document.querySelectorAll(".choice").forEach(b=>{b.classList.toggle("correct",b.dataset.value===source.answer);b.classList.toggle("wrong",b===picked&&!ok)});show(ok,`${ok?"答對了":"答案不正確"}；正確答案是 ${source.answer}。`);if(typeof saveAttempt==="function")saveAttempt({question:id,level,total:1,right:ok?1:0,unitTotal:0,unitRight:0});return}
-    const fields=[...document.querySelectorAll(".blank")];let right=0;fields.forEach(f=>{const ok=f.dataset.answer.split("|").map(normalize).includes(normalize(f.value));f.classList.toggle("good",ok);f.classList.toggle("bad",!ok);right+=ok?1:0});const ok=right===fields.length;show(ok,`關鍵物理關係答對 ${right}/${fields.length} 格。${ok?"鷹架推導完成！":"紅色欄位請配合 Teacher's Key 檢查觀念。"}`);const key=document.getElementById("teacherKey");key.hidden=false;key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${q.blanks.slice(0,limit()).map(x=>`<li><b>${x.label}【標準答案】：\(${x.a.split("|")[0]}\)</b><br><span>【思維線索（Why）】：${x.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${q.self}</div>`;window.MathJax?.typesetPromise?.([key]);if(typeof saveAttempt==="function")saveAttempt({question:id,level,total:fields.length,right,unitTotal:0,unitRight:0});
+    if(level===1){const picked=document.querySelector(".choice.selected");if(!picked){show(false,"請先選擇答案。");return}const ok=picked.dataset.value===source.answer;document.querySelectorAll(".choice").forEach(b=>{b.classList.toggle("correct",b.dataset.value===source.answer);b.classList.toggle("wrong",b===picked&&!ok)});show(ok,`${ok?"答對了":"答案不正確"}；正確答案是 ${source.answer}。`);saveChapter5Attempt({question:id,level,total:1,right:ok?1:0,unitTotal:0,unitRight:0});return}
+    const fields=[...document.querySelectorAll(".blank")];let right=0,unitTotal=0,unitRight=0;fields.forEach((f,i)=>{const ok=f.dataset.answer.split("|").map(normalize).includes(normalize(f.value)),isUnit=/(?:\d|^)(?:mA\/V(?:\^2|²)?|k?Ω)/i.test(q.blanks[i].a.split("|")[0]);f.classList.toggle("good",ok);f.classList.toggle("bad",!ok);right+=ok?1:0;if(isUnit){unitTotal++;unitRight+=ok?1:0}});const ok=right===fields.length;show(ok,`關鍵物理關係答對 ${right}/${fields.length} 格。${ok?"鷹架推導完成！":"紅色欄位請配合 Teacher's Key 檢查觀念。"}`);const key=document.getElementById("teacherKey");key.hidden=false;key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${q.blanks.slice(0,limit()).map(x=>`<li><b>${x.label}【標準答案】：\(${x.a.split("|")[0]}\)</b><br><span>【思維線索（Why）】：${x.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${q.self}</div>`;window.MathJax?.typesetPromise?.([key]);saveChapter5Attempt({question:id,level,total:fields.length,right,unitTotal,unitRight});
   };
-  render();
+  const clear=document.getElementById("clearStats");if(clear)clear.onclick=()=>{if(confirm("確定要清除這台裝置上的學習統計嗎？")){localStorage.removeItem(chapter5StatsKey);renderChapter5Stats()}};
+  renderChapter5Stats();render();
 }
 activateChapter5CLTBatch(chapter5CLTBatch1);
