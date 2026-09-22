@@ -355,18 +355,19 @@ const chapter4CLT = {
     document.querySelector(".meta .tag:first-child").textContent=`${q.year} 年第 ${q.number} 題`;
     document.querySelector(".meta .tag:last-child").textContent=q.topic;
     const img=document.querySelector(".imageWrap img");img.src=cropRoot+q.image;img.alt=`${q.year} 年第 ${q.number} 題原始試題切圖`;
-    document.getElementById("questionTabs").innerHTML=Object.keys(chapter4Remaining).map(key=>`<button style="margin:0 8px 12px 0;padding:9px 14px;border:1px solid #dce3e8;border-radius:9px;cursor:pointer;${key===id?'color:#fff;background:#1764d7;':''}" onclick="location.href='?id=${key}'">${key}</button>`).join("");
+    const nav=document.getElementById("questionTabs");
+    if(nav)nav.innerHTML=Object.keys(chapter4Remaining).map(key=>`<button class="chapterQuestion ${key===id?"active":""}" onclick="location.href='?id=${key}'">${key}</button>`).join("");
   };
   document.getElementById("check").onclick=()=>{
-    if(level===1){const picked=document.querySelector(".choice.selected");if(!picked){show(false,"請先選擇一個答案。");return}document.querySelectorAll(".choice").forEach(b=>{b.classList.toggle("correct",b.dataset.value===q.answer);b.classList.toggle("wrong",b===picked&&b.dataset.value!==q.answer)});const ok=picked.dataset.value===q.answer;show(ok,`${ok?"答對了":"答案不正確"}；正確答案是 ${q.answer}。`);saveAttempt({question:id,level,total:1,right:ok?1:0,unitTotal:0,unitRight:0});return}
+    if(level===1){const picked=document.querySelector(".choice.selected");if(!picked){show(false,"請先選擇一個答案。");return}document.querySelectorAll(".choice").forEach(b=>{b.classList.toggle("correct",b.dataset.value===q.answer);b.classList.toggle("wrong",b===picked&&b.dataset.value!==q.answer)});const ok=picked.dataset.value===q.answer;show(ok,`${ok?"答對了":"答案不正確"}；正確答案是 ${q.answer}。`);if(typeof saveAttempt==="function")saveAttempt({question:id,level,total:1,right:ok?1:0,unitTotal:0,unitRight:0});return}
     const values=[...document.querySelectorAll(".blank")],units=[...document.querySelectorAll(".unitInput")];let right=0,unitRight=0;
     if(clt){
       values.forEach(f=>{const ok=f.dataset.answer.split("|").map(norm).includes(norm(f.value));f.classList.toggle("good",ok);f.classList.toggle("bad",!ok);right+=ok?1:0});
-      const ok=right===values.length;show(ok,`關鍵物理關係答對 ${right}/${values.length} 格。${ok?"鷹架推導完成！":"紅色欄位請配合 Teacher's Key 檢查觀念。"}`);showTeacherKey();saveAttempt({question:id,level,total:values.length,right,unitTotal:0,unitRight:0});return;
+      const ok=right===values.length;show(ok,`關鍵物理關係答對 ${right}/${values.length} 格。${ok?"鷹架推導完成！":"紅色欄位請配合 Teacher's Key 檢查觀念。"}`);showTeacherKey();if(typeof saveAttempt==="function")saveAttempt({question:id,level,total:values.length,right,unitTotal:0,unitRight:0});return;
     }
     values.forEach(f=>{const ok=norm(f.value)===norm(f.dataset.answer);f.classList.toggle("good",ok);f.classList.toggle("bad",!ok);right+=ok?1:0});
     units.forEach(u=>{const expected=u.dataset.unit;const ok=(unitAliases[expected]||[expected]).map(norm).includes(norm(u.value));u.classList.toggle("good",ok);u.classList.toggle("bad",!ok);unitRight+=ok?1:0});
-    const ok=right===values.length&&unitRight===units.length;show(ok,`數值／文字答對 ${right}/${values.length} 格；單位答對 ${unitRight}/${units.length} 格。${ok?"完整計算正確！":"紅色欄位請再檢查。"}`);saveAttempt({question:id,level,total:values.length,right,unitTotal:units.length,unitRight});
+    const ok=right===values.length&&unitRight===units.length;show(ok,`數值／文字答對 ${right}/${values.length} 格；單位答對 ${unitRight}/${units.length} 格。${ok?"完整計算正確！":"紅色欄位請再檢查。"}`);if(typeof saveAttempt==="function")saveAttempt({question:id,level,total:values.length,right,unitTotal:units.length,unitRight});
   };
   render();
 })();
