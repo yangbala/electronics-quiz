@@ -1,3 +1,7 @@
+(()=>{
+const initialParams=new URLSearchParams(location.search);
+const legacyIds=["111-27","111-28","111-29","111-30","111-43"];
+if(!initialParams.has("question")&&!legacyIds.includes(initialParams.get("id")))return;
 const moreQuestions = {
   28: { topic: "BJT 直流偏壓", answer: "D", choices: ["4.13", "3.24", "2.47", "1.55"], counts: [4, 8, 13], steps: [
     String.raw`<b>① 求基極電流</b><br>由 \(I_C=\beta I_B\)，得 \(I_B=\dfrac{I_C}{\beta}=\dfrac{[[2]]\,\mathrm{mA}}{[[100]]}=[[0.02]]\,\mathrm{mA}=20\,\mu\mathrm{A}\)。`,
@@ -154,3 +158,4 @@ document.getElementById("check").onclick=()=>{
 document.getElementById("clearStats").onclick=()=>{if(confirm("確定要清除這台裝置上的學習統計嗎？")){localStorage.removeItem(statsKey);renderStats()}};
 const hostIntro=document.querySelector(".intro");hostIntro.insertAdjacentHTML("afterend",'<div style="margin:-8px 0 16px;padding:12px 14px;border-left:4px solid #1764d7;background:#eaf2ff;border-radius:8px;line-height:1.6"><b>公式與填答說明</b><br>所有數學式皆以 LaTeX 排版；填空欄位位於數學區塊之外。請只輸入數值，不必輸入單位。系統接受一般負號 <code>-</code> 與數學負號 <code>−</code>。</div><nav id="questionTabs" aria-label="範例題目"></nav>');
 render();
+})();
