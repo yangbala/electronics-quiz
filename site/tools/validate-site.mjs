@@ -29,7 +29,7 @@ try { new Function(chapter3); } catch (error) { errors.push(`chapter3-questions.
 // Required content and assets.
 assert(index.includes("MathJax"), "MathJax configuration missing");
 assert(index.includes("tex-svg.js"), "MathJax renderer missing");
-assert(index.includes('src="data/other-questions.js?v=2"'), "data/other-questions.js is not loaded");
+assert(index.includes('src="data/other-questions.js?v=3"'), "data/other-questions.js is not loaded");
 assert(index.includes('src="data/chapter4-remaining.js?v=2"'), "data/chapter4-remaining.js is not loaded");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=2"'), "data/chapter7-questions.js is not loaded");
