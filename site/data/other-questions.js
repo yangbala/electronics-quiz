@@ -44,10 +44,60 @@ const moreQuestions = {
     String.raw`<b>⑥ 代回驗算</b><br>以 \(V_{DC}\pm\dfrac{V_{r(pp)}}{2}\) 重建上下限：\(14+2=[[16]]\,\mathrm{V}\)，\(14-2=[[12]]\,\mathrm{V}\)，與題目相符。`
   ]}
 };
+const legacyChapter4CLT={
+  27:{
+    blanks:[
+      {a:"V_O=V_Z|Vo=Vz|6V",label:"①",why:"齊納在崩潰穩壓區時，與負載並聯的輸出節點被箝在齊納電壓。"},
+      {a:"I_S=I_Z+I_L|Is=Iz+Il",label:"②",why:"串聯電阻電流在輸出節點分流成齊納電流與負載電流，這是節點 KCL。"},
+      {a:"I_Z=I_{ZK}|Iz=Izk|1mA",label:"③",why:"負載電阻最小時負載電流最大，臨界穩壓條件是齊納仍保有膝點電流。"},
+      {a:"I_{L(max)}=I_S-I_{ZK}|ILmax=Is-Izk",label:"④",why:"由輸出節點 KCL 解出最大可供負載的電流，不能把全部串聯電流都交給負載。"},
+      {a:"1.2kΩ|1.2kohm|1200Ω",label:"⑤",why:"由 \(R_L=V_O/I_L\) 得到最小負載電阻，並代回確認齊納電流恰為 1 mA。"}
+    ],
+    model:String.raw`忽略齊納內阻，並假設二極體仍在崩潰穩壓區，因此 {{0}}。輸出節點的核心電流關係為 {{1}}。`,
+    derivation:String.raw`<b>步驟 1：求串聯支路電流</b>
+\[V_{R_S}=V_S-V_Z=12-6=6\,\mathrm{V}\]
+\[I_S=\frac{V_{R_S}}{R_S}=\frac{6\,\mathrm{V}}{1\,\mathrm{k}\Omega}=6\,\mathrm{mA}\]
+<b>步驟 2：建立最小負載電阻的邊界</b><br>當 \(R_L\) 最小時，\(I_L\) 最大；為維持穩壓，臨界條件取 {{2}}。由 KCL 得 {{3}}。
+\[I_{L(\max)}=6-1=5\,\mathrm{mA}\]
+<b>步驟 3：完整代入</b>
+\[R_{L(\min)}=\frac{V_O}{I_{L(\max)}}\]
+\[R_{L(\min)}=\frac{6\,\mathrm{V}}{5\,\mathrm{mA}}=1.2\,\mathrm{k}\Omega\]
+<b>步驟 4：目標指標與代回驗算</b><br>{{4}}，故選 D。
+\[I_L=\frac{6\,\mathrm{V}}{1.2\,\mathrm{k}\Omega}=5\,\mathrm{mA}\]
+\[I_Z=I_S-I_L=6-5=1\,\mathrm{mA}\]
+\[I_{ZK}\le I_Z\le I_{ZM}\quad\Rightarrow\quad1\le1\le16\,\mathrm{mA}\]`,
+    self:"為什麼求最小負載電阻時，齊納電流不能設為零？請說明膝點電流在維持穩壓上的意義。",
+    challenge:String.raw`若 \(R_S\) 改為 \(1.5\,\mathrm{k}\Omega\)，其他條件不變，重新求 \(R_{L(\min)}\)。<br><b>第一步提示：</b>先以新的 \(R_S\) 重算串聯電流 \(I_S\)。`
+  },
+  43:{
+    blanks:[
+      {a:"V_{DC}=(V_{max}+V_{min})/2|VDC=(Vmax+Vmin)/2",label:"①",why:"近似鋸齒漣波以最大、最小值的中點作為直流分量。"},
+      {a:"V_{r(pp)}=V_{max}-V_{min}|Vrpp=Vmax-Vmin",label:"②",why:"峰對峰漣波定義就是輸出波形最大值與最小值之差。"},
+      {a:"V_{r(rms)}=V_{r(pp)}/(2sqrt(3))|Vrrms=Vrpp/(2√3)",label:"③",why:"零平均三角波若峰對峰值為 \(V_{r(pp)}\)，其峰值為一半，有效值再除以 \(\sqrt3\)。"},
+      {a:"r=V_{r(rms)}/V_{DC}|r=Vrrms/VDC",label:"④",why:"漣波率是交流漣波有效值相對於直流分量的比值。"},
+      {a:"8.25%|8%|0.0825",label:"⑤",why:"計算結果約 8.25%，依選項取約 8%，對應 B。"}
+    ],
+    model:String.raw`把輸出分解為直流分量與零平均交流漣波。題目說明漣波近似鋸齒波，可用三角波有效值模型；直流分量近似為 {{0}}。`,
+    derivation:String.raw`<b>步驟 1：求直流分量與峰對峰漣波</b><br>峰對峰定義為 {{1}}。
+\[V_{DC}=\frac{16+12}{2}=14\,\mathrm{V}\]
+\[V_{r(pp)}=16-12=4\,\mathrm{V}\]
+<b>步驟 2：將峰對峰值換成交流有效值</b><br>鋸齒波近似三角波時使用 {{2}}。
+\[V_{r(rms)}=\frac{4}{2\sqrt3}=1.155\,\mathrm{V}\]
+<b>步驟 3：建立漣波率</b><br>核心定義為 {{3}}。
+\[r=\frac{1.155}{14}\times100\%=8.25\%\]
+<b>步驟 4：目標指標與波形驗算</b><br>{{4}}，約為選項 B 的 \(8\%\)。以直流值加減半個峰對峰值重建：
+\[14+\frac42=16\,\mathrm{V},\qquad14-\frac42=12\,\mathrm{V}\]
+與題目上下限一致。`,
+    self:"為什麼漣波率的分子使用交流有效值，而不是直接使用峰對峰值 4 V？請區分兩種波形量的定義。",
+    challenge:String.raw`若波形上下限改為 \(15\,\mathrm{V}\) 與 \(13\,\mathrm{V}\)，仍近似三角漣波，求新的漣波百分率。<br><b>第一步提示：</b>先分別計算 \(V_{DC}\) 與 \(V_{r(pp)}\)。`
+  }
+};
 const params=new URLSearchParams(location.search);
 const idAlias={"111-27":27,"111-28":28,"111-29":29,"111-30":30,"111-43":43};
 const requestedQuestion=idAlias[params.get("id")]||Number(params.get("question"));
 let selectedQuestion=[27,28,29,30,31,43].includes(requestedQuestion)?requestedQuestion:27;
+const requestedLevel=Number(params.get("level"));
+if([1,2,3,4].includes(requestedLevel))level=requestedLevel;
 const baseContent = content;
 const originalContent = () => baseContent().replace(
   `\\dfrac{\\) ${input("d", "6")} \\(\\mathrm{V}}`,
@@ -71,7 +121,12 @@ function otherContent(q) {
   });
   return `<div class="steps">${q.steps.map(step=>`<div class="step">${fillStep(step)}</div>`).join("")}</div>`;
 }
-content = function(){ return selectedQuestion === 27 ? originalContent() : otherContent(moreQuestions[selectedQuestion]); };
+const cltLimit=()=>({2:3,3:4,4:5}[level]||0);
+const cltMathContext=(html,offset)=>{const before=html.slice(0,offset);const inline=(before.match(/\\\(/g)||[]).length>(before.match(/\\\)/g)||[]).length;const display=(before.match(/\\\[/g)||[]).length>(before.match(/\\\]/g)||[]).length;return inline?"inline":display?"display":null};
+function cltReplace(html,q){return html.replace(/\{\{(\d+)\}\}/g,(_,i,offset)=>{const n=Number(i),item=q.blanks[n];const markup=n>=cltLimit()?`<strong>\(${item.a.split("|")[0]}\)</strong>`:`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;const context=cltMathContext(html,offset);return context==="inline"?`\)${markup}\(`:context==="display"?`\]${markup}\[` : markup})}
+function cltContent(q){return `<div class="scaffold"><section class="scaffoldBlock"><h3>一、電路分析起手式（物理建模）</h3><div>${cltReplace(q.model,q)}</div></section><section class="scaffoldBlock"><h3>二、核心電路定律推導（鷹架填空＋代數卸載）</h3><div>${cltReplace(q.derivation,q)}</div></section><section class="scaffoldBlock teacherKey" id="teacherKey" hidden></section><section class="scaffoldBlock"><h3>四、自主遷移挑戰題（Faded Step to Independence）</h3><div>${q.challenge}</div></section></div>`}
+function showLegacyTeacherKey(q){const key=document.getElementById("teacherKey");if(!key)return;key.hidden=false;key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${q.blanks.slice(0,cltLimit()).map(item=>`<li><b>${item.label}【標準答案】：\(${item.a.split("|")[0]}\)</b><br><span>【思維線索（Why）】：${item.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${q.self}</div>`;window.MathJax?.typesetPromise?.([key])}
+content = function(){const clt=legacyChapter4CLT[selectedQuestion];if(level>1&&clt)return cltContent(clt);return selectedQuestion === 27 ? originalContent() : otherContent(moreQuestions[selectedQuestion]); };
 const originalRender = render;
 render = function(){
   originalRender();
@@ -88,7 +143,7 @@ render = function(){
   const nav = document.getElementById("questionTabs");
   if (nav) nav.innerHTML = [27,28,29,30,31,43].map(n=>`<button style="margin:0 8px 12px 0;padding:9px 14px;border:1px solid #dce3e8;border-radius:9px;cursor:pointer;${n===selectedQuestion?'color:#fff;background:#1764d7;':''}" data-question="${n}">第 ${n} 題</button>`).join("");
   nav?.querySelectorAll("button").forEach(b=>b.onclick=()=>{selectedQuestion=Number(b.dataset.question);render()});
-  decorateUnitInputs();
+  if(!(level>1&&legacyChapter4CLT[selectedQuestion]))decorateUnitInputs();
   renderStats();
   if(window.MathJax?.typesetPromise){MathJax.typesetClear?.([document.getElementById("answerArea")]);MathJax.typesetPromise([document.getElementById("answerArea")]);}
 };
@@ -149,6 +204,13 @@ document.getElementById("check").onclick=()=>{
     if(!picked){show(false,"請先選擇答案。");return}
     document.querySelectorAll(".choice").forEach(b=>{b.classList.toggle("correct",b.dataset.value===correct);b.classList.toggle("wrong",b===picked&&b.dataset.value!==correct)});
     const ok=picked.dataset.value===correct;show(ok,`${ok?"答對了":"這題答錯了"}。你的答案：${picked.dataset.value}；正確答案：${correct}。${ok?"已掌握此題型辨識。":"請展開計算層級，確認觀念與關鍵公式。"}`);saveAttempt({question:selectedQuestion,level,total:1,right:ok?1:0,unitTotal:0,unitRight:0});return;
+  }
+  const clt=legacyChapter4CLT[selectedQuestion];
+  if(clt){
+    const fields=[...document.querySelectorAll(".blank")];let right=0;
+    const normalize=s=>s.trim().replace(/\s+/g,"").replace(/[ΩΩ]/g,"ohm").replace(/µ/g,"u").toLowerCase();
+    fields.forEach(f=>{const ok=f.dataset.answer.split("|").map(normalize).includes(normalize(f.value));f.classList.toggle("good",ok);f.classList.toggle("bad",!ok);right+=ok?1:0});
+    const ok=right===fields.length;show(ok,`關鍵物理關係答對 ${right}/${fields.length} 格。${ok?"鷹架推導完成！":"紅色欄位請配合 Teacher's Key 檢查觀念。"}`);showLegacyTeacherKey(clt);saveAttempt({question:selectedQuestion,level,total:fields.length,right,unitTotal:0,unitRight:0});return;
   }
   const fields=[...document.querySelectorAll(".blank")],units=[...document.querySelectorAll(".unitInput")];let right=0,unitRight=0;const mistakes=[];
   fields.forEach((f,i)=>{const ok=normalizedValue(f.value)===normalizedValue(f.dataset.answer);f.classList.toggle("good",ok);f.classList.toggle("bad",!ok);if(ok)right++;else mistakes.push(`數值第 ${i+1} 格：你填「${f.value||"未填"}」，正確答案是 ${f.dataset.answer}`)});

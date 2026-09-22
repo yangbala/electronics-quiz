@@ -29,7 +29,7 @@ try { new Function(chapter3); } catch (error) { errors.push(`chapter3-questions.
 // Required content and assets.
 assert(index.includes("MathJax"), "MathJax configuration missing");
 assert(index.includes("tex-svg.js"), "MathJax renderer missing");
-assert(index.includes('src="data/other-questions.js?v=3"'), "data/other-questions.js is not loaded");
+assert(index.includes('src="data/other-questions.js?v=4"'), "data/other-questions.js is not loaded");
 assert(index.includes('src="data/chapter4-remaining.js?v=5"'), "data/chapter4-remaining.js is not loaded");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=2"'), "data/chapter7-questions.js is not loaded");
@@ -120,7 +120,11 @@ const q27Templates = [...q27Section.matchAll(/<div class="step">([\s\S]*?)<\/div
 const questionData = extra.split("let selectedQuestion")[0];
 const rawTemplates = [...questionData.matchAll(/String\.raw`([\s\S]*?)`/g)].map(match => match[1]);
 assert(q27Templates.length === 18, `expected 18 question-27 solution steps, found ${q27Templates.length}`);
-assert(rawTemplates.length === 30, `expected 30 question-28-to-31-and-43 solution steps, found ${rawTemplates.length}`);
+assert(rawTemplates.length === 36, `expected 36 legacy and Chapter 4 CLT templates, found ${rawTemplates.length}`);
+const legacyChapter4Section=extra.match(/const legacyChapter4CLT=\{([\s\S]*?)\n\};\nconst params/)?.[1]??"";
+assert(legacyChapter4Section.includes("27:{")&&legacyChapter4Section.includes("43:{"),"111-27 and 111-43 CLT records missing");
+assert((legacyChapter4Section.match(/label:"[①②③④⑤]"/g)||[]).length===10,"111-27 and 111-43 must each provide five CLT blanks");
+assert((legacyChapter4Section.match(/Teacher's Key/g)||[]).length===0,"Teacher's Key should be rendered once by the shared renderer");
 const allTemplates = [
   ...q27Templates.map(source => ({ source, alreadyRendered: true })),
   ...rawTemplates.map(source => ({ source, alreadyRendered: false }))
