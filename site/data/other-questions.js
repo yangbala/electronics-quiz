@@ -40,7 +40,9 @@ const moreQuestions = {
     String.raw`<b>⑥ 代回驗算</b><br>以 \(V_{DC}\pm\dfrac{V_{r(pp)}}{2}\) 重建上下限：\(14+2=[[16]]\,\mathrm{V}\)，\(14-2=[[12]]\,\mathrm{V}\)，與題目相符。`
   ]}
 };
-const requestedQuestion=Number(new URLSearchParams(location.search).get("question"));
+const params=new URLSearchParams(location.search);
+const idAlias={"111-27":27,"111-28":28,"111-29":29,"111-30":30,"111-43":43};
+const requestedQuestion=idAlias[params.get("id")]||Number(params.get("question"));
 let selectedQuestion=[27,28,29,30,31,43].includes(requestedQuestion)?requestedQuestion:27;
 const baseContent = content;
 const originalContent = () => baseContent().replace(
@@ -74,7 +76,10 @@ render = function(){
   document.querySelector(".meta .tag:first-child").textContent = `111 年第 ${selectedQuestion} 題`;
   document.querySelector(".meta .tag:last-child").textContent = q ? q.topic : "稽納二極體";
   const img = document.querySelector(".imageWrap img");
-  img.src = selectedQuestion===43?`assets/chapter4/111-43.png`:`assets/questions/q${selectedQuestion}.jpg`;
+  const localRoot="file:///C:/Users/Eli/.codex/visualizations/2026/08/13/019ffba4-80b5-7ed3-a9a4-ee902d86127c/";
+  img.src = location.protocol==="file:"
+    ? (selectedQuestion===43?`${localRoot}chapter4_questions/111-43.png`:`${localRoot}q${selectedQuestion}.jpg`)
+    : (selectedQuestion===43?"assets/chapter4/111-43.png":`assets/questions/q${selectedQuestion}.jpg`);
   img.alt = `第 ${selectedQuestion} 題原始試題切圖`;
   const nav = document.getElementById("questionTabs");
   if (nav) nav.innerHTML = [27,28,29,30,31,43].map(n=>`<button style="margin:0 8px 12px 0;padding:9px 14px;border:1px solid #dce3e8;border-radius:9px;cursor:pointer;${n===selectedQuestion?'color:#fff;background:#1764d7;':''}" data-question="${n}">第 ${n} 題</button>`).join("");

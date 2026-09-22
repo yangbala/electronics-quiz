@@ -122,7 +122,7 @@ String.raw`<b>⑦ 反向檢查</b><br>若量在耦合電容左側才會看見 \(
 ;
 (function activateChapter7(){
 const id=new URLSearchParams(location.search).get("id"),q=chapter7Questions[id];if(!q)return;
-const cropRoot="file:///C:/Users/Eli/.codex/visualizations/2026/08/13/019ffba4-80b5-7ed3-a9a4-ee902d86127c/chapter7_questions/";
+const cropRoot=location.protocol==="file:"?"file:///C:/Users/Eli/.codex/visualizations/2026/08/13/019ffba4-80b5-7ed3-a9a4-ee902d86127c/chapter7_questions/":"assets/chapter7/";
 const norm=v=>v.trim().replace(/,/g,"").replace(/−/g,"-").replace(/\s/g,"").toLowerCase();
 const unitAliases={V:["v","伏特"],mV:["mv","毫伏","毫伏特"],mA:["ma","毫安","毫安培"],"µA":["µa","μa","ua","微安","微安培"],A:["a","安培"],mS:["ms","毫西門子"],Ω:["ω","Ω","ohm","ohms","歐","歐姆"],"kΩ":["kω","kΩ","kohm","kohms","千歐","千歐姆"],格:["格","div","division"],"—":[""]};
 function solution(){let token=0,limit=q.counts[level-2];return `<div class="steps">${q.steps.map(step=>`<div class="step">${step.replace(/\{\{(.*?)\|(.*?)\}\}/g,(_,answer,unit,offset)=>{token++;const prefix=step.slice(0,offset),inMath=prefix.lastIndexOf("\\(")>prefix.lastIndexOf("\\)");const fixed=`<strong>${answer}</strong>${unit==="—"?"":` <span class="answerUnit">${unit}</span>`}`;const field=`<span class="blankRef">${token}</span><span class="answerPair"><input class="blank" data-answer="${answer}" placeholder="數值／文字">${unit==="—"?`<span class="dimensionless">無單位</span>`:`<input class="unitInput" data-unit="${unit}" placeholder="${unit}">`}</span>`;const rendered=token>limit?fixed:field;return inMath?`\\) ${rendered} \\(`:rendered})}</div>`).join("")}</div>`}

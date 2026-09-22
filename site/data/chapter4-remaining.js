@@ -85,17 +85,19 @@ const chapter4Remaining = {
   const id=new URLSearchParams(location.search).get("id");
   const q=chapter4Remaining[id];
   if(!q)return;
-  const cropRoot="assets/chapter4/";
+  const cropRoot=location.protocol==="file:"?"file:///C:/Users/Eli/.codex/visualizations/2026/08/13/019ffba4-80b5-7ed3-a9a4-ee902d86127c/chapter4_questions/":"assets/chapter4/";
   const unitAliases={V:["v","伏特"],mA:["ma","毫安培"],Hz:["hz","赫茲"],s:["s","秒"],ms:["ms","毫秒"],Ω:["ω","Ω","ohm","ohms","歐姆"],mW:["mw","毫瓦"],A:["a","安培"],"—":["—","-","無","無單位"]};
   const norm=v=>v.trim().replace(/,/g,"").replace(/\s/g,"").toLowerCase();
   const marker=/\{\{(.*?)\|(.*?)\}\}/g;
   function solution(){
     let token=0,limit=q.counts[level-2];
-    return `<div class="steps">${q.steps.map(step=>`<div class="step">${step.replace(marker,(_,answer,unit)=>{
+    return `<div class="steps">${q.steps.map(step=>`<div class="step">${step.replace(marker,(_,answer,unit,offset)=>{
       token++; if(token>limit)return `<strong>${answer}</strong>${unit==="—"?"":` \\(${unit}\\)`}`;
       const key=`c4-${id}-${token}`;
       const unitField=unit==="—"?`<span class="dimensionless">無單位</span>`:`<input class="unitInput" data-unit="${unit}" placeholder="${unit}" aria-label="第 ${token} 格單位">`;
-      return `<span class="blankRef">${token}</span><span class="answerPair"><input class="blank" id="${key}" data-answer="${answer}" placeholder="數值或文字">${unitField}</span>`;
+      const field=`<span class="blankRef">${token}</span><span class="answerPair"><input class="blank" id="${key}" data-answer="${answer}" placeholder="數值或文字">${unitField}</span>`;
+      const prefix=step.slice(0,offset),inInline=prefix.lastIndexOf("\\(")>prefix.lastIndexOf("\\)"),inDisplay=prefix.lastIndexOf("\\[")>prefix.lastIndexOf("\\]");
+      return inInline?`\\) ${field} \\(`:inDisplay?`\\] ${field} \\[`:field;
     })}</div>`).join("")}</div>`;
   }
   content=function(){
