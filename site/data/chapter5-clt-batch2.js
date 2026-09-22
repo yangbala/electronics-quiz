@@ -40,10 +40,9 @@ self:"同一顆 MOSFET 的 \(K\) 是元件參數；為何改變偏壓後 \(I_D\)
 {a:"負|negative",label:"②",why:"P 通道增強型元件要形成電洞通道，閘極需相對源極為負。"},
 {a:"截止|cutoff",label:"③",why:"增強型 MOSFET 在零閘源偏壓時沒有反轉通道。"},
 {a:"P 型|P型",label:"④",why:"N 通道元件須在 P 型基板表面反轉形成 N 型通道。"},
-{a:"D",label:"⑤",why:"『N 通道 MOSFET 的基板為 N 型』與實際結構相反，故 D 為錯誤敘述。"}],
+{a:"D",label:"⑤",why:"選項 D 正確指出 N 通道 MOSFET 使用 P 型基板，再由正閘壓形成 N 型反轉通道。"}],
 model:String.raw`依序檢查「是否預先形成通道」「閘極電壓極性」與「基板摻雜型別」。空乏型在 \(V_{GS}=0\) 時 {{0}}。`,
-derivation:String.raw`<b>步驟 1：判斷通道與偏壓</b><br>P 通道增強型需要 {{1}} 的 \(V_{GS}\)；增強型元件在 \(V_{GS}=0\) 時為 {{2}}。<br><br><b>步驟 2：判斷元件結構</b><br>N 通道 MOSFET 的源／汲極為 N 型，而基板應為 {{3}}。<br><br><b>步驟 3：提煉答案</b><br>選項 {{4}} 把基板摻雜型別說反，因此是不正確敘述。`,
+derivation:String.raw`<b>步驟 1：判斷通道與偏壓</b><br>P 通道增強型需要 {{1}} 的 \(V_{GS}\)；增強型元件在 \(V_{GS}=0\) 時為 {{2}}。因此 A、B、C 都不正確。<br><br><b>步驟 2：判斷元件結構</b><br>N 通道 MOSFET 的源／汲極為 N 型，而基板應為 {{3}}。<br><br><b>步驟 3：提煉答案</b><br>選項 {{4}} 正確描述 N 通道 MOSFET 的基板摻雜型別，因此答案為 D。`,
 self:"為什麼 N 通道元件反而使用 P 型基板？請用『反轉層』說明閘極電場如何建立通道。",challenge:String.raw`若改成 P 通道 MOSFET，基板、源極與汲極各應為何種摻雜？<br><b>第一步提示：</b>先把 N 通道結構的所有摻雜型別對調。`}
 };
 activateChapter5CLTBatch(chapter5CLTBatch2);
-
