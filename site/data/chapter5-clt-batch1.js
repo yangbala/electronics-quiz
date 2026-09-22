@@ -46,8 +46,8 @@ derivation:String.raw`<b>步驟 1：直流工作點</b>\[I_D=\frac{15-10.6}{2.2\
 self:"本題為什麼必須在算出 \(R_S\) 後再檢查飽和區，而不能一開始就把平方律視為必然成立？",challenge:String.raw`若指定 \(V_D=8.4\,V\)，其他條件不變，重新設計 \(R_S\)。<br><b>第一步提示：</b>先由汲極支路重算 \(I_D\)。`}
 };
 
-(function activateChapter5CLTBatch1(){
-  const params=new URLSearchParams(location.search),id=params.get("id"),q=chapter5CLTBatch1[id];
+function activateChapter5CLTBatch(map){
+  const params=new URLSearchParams(location.search),id=params.get("id"),q=map[id];
   if(!q)return;
   const requested=Number(params.get("level"));if([1,2,3,4].includes(requested))level=requested;
   const limit=()=>({2:3,3:4,4:5}[level]||0);
@@ -63,4 +63,5 @@ self:"本題為什麼必須在算出 \(R_S\) 後再檢查飽和區，而不能�
     const fields=[...document.querySelectorAll(".blank")];let right=0;fields.forEach(f=>{const ok=f.dataset.answer.split("|").map(normalize).includes(normalize(f.value));f.classList.toggle("good",ok);f.classList.toggle("bad",!ok);right+=ok?1:0});const ok=right===fields.length;show(ok,`關鍵物理關係答對 ${right}/${fields.length} 格。${ok?"鷹架推導完成！":"紅色欄位請配合 Teacher's Key 檢查觀念。"}`);const key=document.getElementById("teacherKey");key.hidden=false;key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${q.blanks.slice(0,limit()).map(x=>`<li><b>${x.label}【標準答案】：\(${x.a.split("|")[0]}\)</b><br><span>【思維線索（Why）】：${x.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${q.self}</div>`;window.MathJax?.typesetPromise?.([key]);if(typeof saveAttempt==="function")saveAttempt({question:id,level,total:fields.length,right,unitTotal:0,unitRight:0});
   };
   render();
-})();
+}
+activateChapter5CLTBatch(chapter5CLTBatch1);
