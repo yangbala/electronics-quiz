@@ -62,6 +62,9 @@ assert(index.includes('src="data/chapter5-questions.js?v=3"'), "data/chapter5-qu
 assert(index.includes('src="data/chapter2-questions.js?v=6"'), "data/chapter2-questions.js is not loaded");
 assert(fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8").includes('if(n>=limit())return context?`\\\\boxed{${shown}}`'),"Chapter 2 revealed answers must stay inside their current LaTeX formula");
 assert(index.includes('.equationLine{display:flex'),"single-line equation-and-answer layout missing");
+assert(index.includes('.equationRun{display:inline-flex'),"shared non-wrapping equation-answer layout missing");
+assert(index.includes('function keepEquationAnswersTogether(root)'),"shared equation-answer grouping function missing");
+assert(index.includes("MathJax.typesetPromise([root]).then(()=>keepEquationAnswersTogether(root))"),"equation-answer grouping must run after MathJax rendering");
 assert(fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8").includes('<div class="equationLine"><span>\\(8=2\\dfrac{R_f}{R}'),"115-47 target equation must use the single-line layout");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=3"'), "data/chapter7-questions.js is not loaded");
