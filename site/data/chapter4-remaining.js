@@ -1,51 +1,51 @@
 const chapter4Remaining = {
   "112-28": {year:112, number:28, topic:"齊納二極體穩壓範圍", answer:"A", choices:["32 V、46 V","34 V、46 V","32 V、50 V","34 V、58 V"], image:"112-28.png", counts:[3,7,11], steps:[
-    `<b>① 求負載電流</b><br>穩壓時 \(V_O=V_Z=20\,\mathrm{V}\)，所以 \(I_L=V_O/R_L=20/2\,\mathrm{k}\Omega=\) {{10|mA}}。`,
-    `<b>② 求齊納二極體最大電流</b><br>\(I_{Z(\max)}=P_{Z(\max)}/V_Z=320\,\mathrm{mW}/20\,\mathrm{V}=\) {{16|mA}}。`,
-    `<b>③ 最小電源電壓的臨界條件</b><br>令 \(I_Z=I_{ZK}=2\,\mathrm{mA}\)，則 \(I_S=I_L+I_Z=10+2=\) {{12|mA}}。`,
-    `<b>④ 求電源最小值</b><br>\(V_{S(\min)}=V_Z+I_SR_S=20+(12\,\mathrm{mA})(1\,\mathrm{k}\Omega)=\) {{32|V}}。`,
-    `<b>⑤ 求電源最大值</b><br>\(I_S=I_L+I_{Z(\max)}=10+16=\) {{26|mA}}，故 \(V_{S(\max)}=20+(26\,\mathrm{mA})(1\,\mathrm{k}\Omega)=\) {{46|V}}，選 A。`,
-    `<b>⑥ 代回驗算</b><br>當 \(V_S=32\,\mathrm{V}\) 時，\(I_Z=(32-20)/1-10=\) {{2|mA}}；當 \(V_S=46\,\mathrm{V}\) 時，\(I_Z=(46-20)/1-10=\) {{16|mA}}，均落在 \(2\sim16\,\mathrm{mA}\)。`
+    String.raw`<b>① 求負載電流</b><br>穩壓時 \(V_O=V_Z=20\,\mathrm{V}\)，所以 \(I_L=V_O/R_L=20/2\,\mathrm{k}\Omega=\) {{10|mA}}。`,
+    String.raw`<b>② 求齊納二極體最大電流</b><br>\(I_{Z(\max)}=P_{Z(\max)}/V_Z=320\,\mathrm{mW}/20\,\mathrm{V}=\) {{16|mA}}。`,
+    String.raw`<b>③ 最小電源電壓的臨界條件</b><br>令 \(I_Z=I_{ZK}=2\,\mathrm{mA}\)，則 \(I_S=I_L+I_Z=10+2=\) {{12|mA}}。`,
+    String.raw`<b>④ 求電源最小值</b><br>\(V_{S(\min)}=V_Z+I_SR_S=20+(12\,\mathrm{mA})(1\,\mathrm{k}\Omega)=\) {{32|V}}。`,
+    String.raw`<b>⑤ 求電源最大值</b><br>\(I_S=I_L+I_{Z(\max)}=10+16=\) {{26|mA}}，故 \(V_{S(\max)}=20+(26\,\mathrm{mA})(1\,\mathrm{k}\Omega)=\) {{46|V}}，選 A。`,
+    String.raw`<b>⑥ 代回驗算</b><br>當 \(V_S=32\,\mathrm{V}\) 時，\(I_Z=(32-20)/1-10=\) {{2|mA}}；當 \(V_S=46\,\mathrm{V}\) 時，\(I_Z=(46-20)/1-10=\) {{16|mA}}，均落在 \(2\sim16\,\mathrm{mA}\)。`
   ]},
   "112-45": {year:112, number:45, topic:"中心抽頭全波整流", answer:"D", choices:["平均值為 20/π V","有效值為 12 V","漣波頻率為 50 Hz","漣波週期為 0.01 秒"], image:"112-45.png", counts:[2,5,8], steps:[
-    `<b>① 修正變壓器實際次級電壓</b><br>一次側額定 \(120\,\mathrm{V}\) 時次級為 \(0-12-24\,\mathrm{V}\)；實際輸入只有 \(100\,\mathrm{V}\)，每半繞組有效值為 \(12(100/120)=\) {{10|V}}。`,
-    `<b>② 求輸出峰值</b><br>理想二極體下，\(V_m=10\sqrt2=\) {{14.14|V}}。`,
-    `<b>③ 檢查平均值</b><br>\(V_{O(\mathrm{avg})}=2V_m/\pi=20\sqrt2/\pi\approx\) {{9.00|V}}，不是 \(20/\pi\,\mathrm{V}\)。`,
-    `<b>④ 檢查有效值</b><br>全波整流波形有效值等於半繞組正弦有效值，即 \(V_{O(\mathrm{rms})}=\) {{10|V}}，不是 \(12\,\mathrm{V}\)。`,
-    `<b>⑤ 求漣波頻率與週期</b><br>\(f_r=2f_s=2(50)=\) {{100|Hz}}，\(T_r=1/f_r=\) {{0.01|s}}，因此選 D。`,
-    `<b>⑥ 交叉驗算</b><br>每個輸入週期有兩個輸出脈波，所以 \(50\,\mathrm{Hz}\times2=\) {{100|Hz}}，週期確為 {{0.01|s}}。`
+    String.raw`<b>① 修正變壓器實際次級電壓</b><br>一次側額定 \(120\,\mathrm{V}\) 時次級為 \(0-12-24\,\mathrm{V}\)；實際輸入只有 \(100\,\mathrm{V}\)，每半繞組有效值為 \(12(100/120)=\) {{10|V}}。`,
+    String.raw`<b>② 求輸出峰值</b><br>理想二極體下，\(V_m=10\sqrt2=\) {{14.14|V}}。`,
+    String.raw`<b>③ 檢查平均值</b><br>\(V_{O(\mathrm{avg})}=2V_m/\pi=20\sqrt2/\pi\approx\) {{9.00|V}}，不是 \(20/\pi\,\mathrm{V}\)。`,
+    String.raw`<b>④ 檢查有效值</b><br>全波整流波形有效值等於半繞組正弦有效值，即 \(V_{O(\mathrm{rms})}=\) {{10|V}}，不是 \(12\,\mathrm{V}\)。`,
+    String.raw`<b>⑤ 求漣波頻率與週期</b><br>\(f_r=2f_s=2(50)=\) {{100|Hz}}，\(T_r=1/f_r=\) {{0.01|s}}，因此選 D。`,
+    String.raw`<b>⑥ 交叉驗算</b><br>每個輸入週期有兩個輸出脈波，所以 \(50\,\mathrm{Hz}\times2=\) {{100|Hz}}，週期確為 {{0.01|s}}。`
   ]},
   "113-26": {year:113, number:26, topic:"橋式整流平均值與 PIV", answer:"A", choices:["24√2/π V、12√2 V","24√2/π V、12 V","24/π V、12√2 V","24√2 V、12√2/π V"], image:"113-26.png", counts:[2,5,8], steps:[
-    `<b>① 求次級有效值</b><br>變壓器匝數比為 \(110:12\)，一次側為 \(110\,\mathrm{V_{rms}}\)，故次級為 {{12|V}}。`,
-    `<b>② 求次級峰值</b><br>\(V_m=\sqrt2V_{rms}=12\sqrt2\approx\) {{16.97|V}}。`,
-    `<b>③ 求全波整流平均值</b><br>\(V_{O(\mathrm{avg})}=2V_m/\pi=2(12\sqrt2)/\pi=\) {{24√2/π|V}}。`,
-    `<b>④ 判斷橋式整流 PIV</b><br>橋式整流中，截止二極體承受的最大反向電壓等於次級峰值，因此 \(PIV=V_m=\) {{12√2|V}}。`,
+    String.raw`<b>① 求次級有效值</b><br>變壓器匝數比為 \(110:12\)，一次側為 \(110\,\mathrm{V_{rms}}\)，故次級為 {{12|V}}。`,
+    String.raw`<b>② 求次級峰值</b><br>\(V_m=\sqrt2V_{rms}=12\sqrt2\approx\) {{16.97|V}}。`,
+    String.raw`<b>③ 求全波整流平均值</b><br>\(V_{O(\mathrm{avg})}=2V_m/\pi=2(12\sqrt2)/\pi=\) {{24√2/π|V}}。`,
+    String.raw`<b>④ 判斷橋式整流 PIV</b><br>橋式整流中，截止二極體承受的最大反向電壓等於次級峰值，因此 \(PIV=V_m=\) {{12√2|V}}。`,
     `<b>⑤ 對照選項</b><br>平均值為 {{24√2/π|V}}、PIV 為 {{12√2|V}}，所以選 A。`,
-    `<b>⑥ 數值驗算</b><br>\(24\sqrt2/\pi\approx\) {{10.80|V}}，且 {{10.80|V}} 小於峰值 {{16.97|V}}，量值關係合理。`
+    String.raw`<b>⑥ 數值驗算</b><br>\(24\sqrt2/\pi\approx\) {{10.80|V}}，且 {{10.80|V}} 小於峰值 {{16.97|V}}，量值關係合理。`
   ]},
   "113-43": {year:113, number:43, topic:"全波整流電容濾波", answer:"D", choices:["漣波頻率與輸入相同","輸入峰值愈大，漣波愈小","負載電阻愈大，漣波愈大","電容量愈大，漣波愈小"], image:"113-43.png", counts:[2,4,7], steps:[
-    `<b>① 建立近似式</b><br>全波整流加電容濾波的峰對峰漣波近似為 \(V_{r(pp)}\approx I_L/(f_rC)\)。`,
-    `<b>② 判斷漣波頻率</b><br>全波整流 \(f_r=2f_s\)，所以選項 A 錯誤。`,
-    `<b>③ 判斷負載電阻影響</b><br>\(I_L\approx V_{DC}/R_L\)，因此 \(R_L\) 增大會使 \(I_L\) {{減小|—}}，漣波也 {{減小|—}}，選項 C 錯誤。`,
-    `<b>④ 判斷電容量影響</b><br>由 \(V_{r(pp)}\propto1/C\)，\(C\) 愈大，漣波 {{愈小|—}}。`,
+    String.raw`<b>① 建立近似式</b><br>全波整流加電容濾波的峰對峰漣波近似為 \(V_{r(pp)}\approx I_L/(f_rC)\)。`,
+    String.raw`<b>② 判斷漣波頻率</b><br>全波整流 \(f_r=2f_s\)，所以選項 A 錯誤。`,
+    String.raw`<b>③ 判斷負載電阻影響</b><br>\(I_L\approx V_{DC}/R_L\)，因此 \(R_L\) 增大會使 \(I_L\) {{減小|—}}，漣波也 {{減小|—}}，選項 C 錯誤。`,
+    String.raw`<b>④ 判斷電容量影響</b><br>由 \(V_{r(pp)}\propto1/C\)，\(C\) 愈大，漣波 {{愈小|—}}。`,
     `<b>⑤ 得出答案</b><br>符合公式者為選項 {{D|—}}。`,
-    `<b>⑥ 極限驗算</b><br>若 \(C\to\infty\)，放電斜率趨近零，則 \(V_{r(pp)}\to\) {{0|V}}；再次確認 D。`
+    String.raw`<b>⑥ 極限驗算</b><br>若 \(C\to\infty\)，放電斜率趨近零，則 \(V_{r(pp)}\to\) {{0|V}}；再次確認 D。`
   ]},
   "113-44": {year:113, number:44, topic:"齊納穩壓可調電阻範圍", answer:"D", choices:["300 Ω、600 Ω","250 Ω、600 Ω","250 Ω、500 Ω","240 Ω、500 Ω"], image:"113-44.png", counts:[3,7,11], steps:[
-    `<b>① 求負載電流</b><br>\(I_L=V_O/R_L=10\,\mathrm{V}/1\,\mathrm{k}\Omega=\) {{10|mA}}。`,
-    `<b>② 求最大齊納電流</b><br>\(I_{Z(\max)}=P_{Z(\max)}/V_Z=150\,\mathrm{mW}/10\,\mathrm{V}=\) {{15|mA}}。`,
-    `<b>③ 求電阻最小值時的總電流</b><br>\(I_{S(\max)}=I_L+I_{Z(\max)}=10+15=\) {{25|mA}}。`,
-    `<b>④ 求電阻最小值</b><br>\(R_{\min}=(V_S-V_Z)/I_{S(\max)}=(16-10)/25\,\mathrm{mA}=\) {{240|Ω}}。`,
-    `<b>⑤ 求電阻最大值</b><br>臨界穩壓時 \(I_Z=I_{ZK}=2\,\mathrm{mA}\)，\(I_{S(\min)}=10+2=\) {{12|mA}}，故 \(R_{\max}=6/12\,\mathrm{mA}=\) {{500|Ω}}，選 D。`,
-    `<b>⑥ 代回驗算</b><br>代入 \(R=240\,\Omega\)，得 \(I_Z=25-10=\) {{15|mA}}；代入 \(R=500\,\Omega\)，得 \(I_Z=12-10=\) {{2|mA}}，恰為兩個邊界。`
+    String.raw`<b>① 求負載電流</b><br>\(I_L=V_O/R_L=10\,\mathrm{V}/1\,\mathrm{k}\Omega=\) {{10|mA}}。`,
+    String.raw`<b>② 求最大齊納電流</b><br>\(I_{Z(\max)}=P_{Z(\max)}/V_Z=150\,\mathrm{mW}/10\,\mathrm{V}=\) {{15|mA}}。`,
+    String.raw`<b>③ 求電阻最小值時的總電流</b><br>\(I_{S(\max)}=I_L+I_{Z(\max)}=10+15=\) {{25|mA}}。`,
+    String.raw`<b>④ 求電阻最小值</b><br>\(R_{\min}=(V_S-V_Z)/I_{S(\max)}=(16-10)/25\,\mathrm{mA}=\) {{240|Ω}}。`,
+    String.raw`<b>⑤ 求電阻最大值</b><br>臨界穩壓時 \(I_Z=I_{ZK}=2\,\mathrm{mA}\)，\(I_{S(\min)}=10+2=\) {{12|mA}}，故 \(R_{\max}=6/12\,\mathrm{mA}=\) {{500|Ω}}，選 D。`,
+    String.raw`<b>⑥ 代回驗算</b><br>代入 \(R=240\,\Omega\)，得 \(I_Z=25-10=\) {{15|mA}}；代入 \(R=500\,\Omega\)，得 \(I_Z=12-10=\) {{2|mA}}，恰為兩個邊界。`
   ]},
   "114-27": {year:114, number:27, topic:"全波整流波形因數", answer:"C", choices:["1/√2","2√2/π","π/(2√2)","√2"], image:"114-27.png", counts:[2,4,7], steps:[
-    `<b>① 寫出波形因數定義</b><br>\(K_f=V_{rms}/V_{avg}\)。`,
-    `<b>② 全波整流有效值</b><br>\(V_{rms}=V_m/\sqrt2\)。`,
-    `<b>③ 全波整流平均值</b><br>\(V_{avg}=2V_m/\pi\)。`,
-    `<b>④ 代入定義</b><br>\(K_f=(V_m/\sqrt2)/(2V_m/\pi)=\) {{π/(2√2)|—}}。`,
-    `<b>⑤ 數值檢查</b><br>\(K_f=\pi/(2\sqrt2)\approx\) {{1.111|—}}，所以選 {{C|—}}。`,
-    `<b>⑥ 反向驗算</b><br>\(V_{rms}/K_f=(V_m/\sqrt2)/(\pi/2\sqrt2)=\) {{2Vm/π|V}}，回到正確平均值。`
+    String.raw`<b>① 寫出波形因數定義</b><br>\(K_f=V_{rms}/V_{avg}\)。`,
+    String.raw`<b>② 全波整流有效值</b><br>\(V_{rms}=V_m/\sqrt2\)。`,
+    String.raw`<b>③ 全波整流平均值</b><br>\(V_{avg}=2V_m/\pi\)。`,
+    String.raw`<b>④ 代入定義</b><br>\(K_f=(V_m/\sqrt2)/(2V_m/\pi)=\) {{π/(2√2)|—}}。`,
+    String.raw`<b>⑤ 數值檢查</b><br>\(K_f=\pi/(2\sqrt2)\approx\) {{1.111|—}}，所以選 {{C|—}}。`,
+    String.raw`<b>⑥ 反向驗算</b><br>\(V_{rms}/K_f=(V_m/\sqrt2)/(\pi/2\sqrt2)=\) {{2Vm/π|V}}，回到正確平均值。`
   ]},
   "114-28": {year:114, number:28, topic:"二極體與 LED 基本觀念", answer:"D", choices:["空乏區電位差稱為順向偏壓","溫度升高時逆向飽和電流降低","LED 顏色主要由工作電壓決定","順向偏壓復合時釋放能量發光"], image:"114-28.png", counts:[2,4,7], steps:[
     `<b>① 檢查 A</b><br>空乏區內建電位是接面本身形成的位障，不等同外加順向偏壓，因此 A 錯。`,
@@ -53,31 +53,31 @@ const chapter4Remaining = {
     `<b>③ 檢查 C</b><br>LED 發光顏色主要由半導體材料的 {{能隙|—}} 決定，不是由工作電壓大小決定。`,
     `<b>④ 檢查 D</b><br>順向偏壓下，電子與電洞 {{復合|—}} 時以光子形式釋放能量，敘述正確。`,
     `<b>⑤ 得出答案</b><br>唯一正確選項為 {{D|—}}。`,
-    `<b>⑥ 能量關係驗算</b><br>光子能量滿足 \(E_g=hf=hc/\lambda\)；能隙決定頻率與 {{波長|—}}，再次排除 C。`
+    String.raw`<b>⑥ 能量關係驗算</b><br>光子能量滿足 \(E_g=hf=hc/\lambda\)；能隙決定頻率與 {{波長|—}}，再次排除 C。`
   ]},
   "114-42": {year:114, number:42, topic:"中心抽頭整流二極體平均電流", answer:"A", choices:["√2/π A","2√2/π A","√2 A","2√2 A"], image:"114-42.png", counts:[3,6,9], steps:[
-    `<b>① 求每半次級有效值</b><br>\(V_{2,rms}=110(1/11)=\) {{10|V}}。`,
-    `<b>② 求每半次級峰值</b><br>\(V_m=10\sqrt2\,\mathrm{V}\)。`,
-    `<b>③ 求負載電流峰值</b><br>\(I_m=V_m/R_L=10\sqrt2/10=\) {{√2|A}}。`,
-    `<b>④ 判斷單顆二極體導通區間</b><br>每顆二極體只導通半個週期，所以其全週期平均電流為 \(I_{D(avg)}=I_m/\pi\)。`,
-    `<b>⑤ 計算答案</b><br>\(I_{D(avg)}=\sqrt2/\pi=\) {{√2/π|A}}，選 {{A|—}}。`,
-    `<b>⑥ 交叉驗算</b><br>負載平均電流為 \(2I_m/\pi=2\sqrt2/\pi\,\mathrm{A}\)，兩顆二極體平均值相加為 {{2√2/π|A}}，一致。`
+    String.raw`<b>① 求每半次級有效值</b><br>\(V_{2,rms}=110(1/11)=\) {{10|V}}。`,
+    String.raw`<b>② 求每半次級峰值</b><br>\(V_m=10\sqrt2\,\mathrm{V}\)。`,
+    String.raw`<b>③ 求負載電流峰值</b><br>\(I_m=V_m/R_L=10\sqrt2/10=\) {{√2|A}}。`,
+    String.raw`<b>④ 判斷單顆二極體導通區間</b><br>每顆二極體只導通半個週期，所以其全週期平均電流為 \(I_{D(avg)}=I_m/\pi\)。`,
+    String.raw`<b>⑤ 計算答案</b><br>\(I_{D(avg)}=\sqrt2/\pi=\) {{√2/π|A}}，選 {{A|—}}。`,
+    String.raw`<b>⑥ 交叉驗算</b><br>負載平均電流為 \(2I_m/\pi=2\sqrt2/\pi\,\mathrm{A}\)，兩顆二極體平均值相加為 {{2√2/π|A}}，一致。`
   ]},
   "115-27": {year:115, number:27, topic:"半波與全波整流比較", answer:"C", choices:["全波平均值 220√2/π V","半波平均值 220√2/π V","全波波形頻率 120 Hz","半波波形頻率 120 Hz"], image:"115-27.png", counts:[2,5,8], steps:[
-    `<b>① 由角頻率求輸入頻率</b><br>\(\omega=377\,\mathrm{rad/s}\)，故 \(f=\omega/(2\pi)\approx\) {{60|Hz}}。`,
-    `<b>② 確認輸入峰值</b><br>由 \(v(t)=110\sin(377t)\)，峰值為 {{110|V}}，不是 \(110\sqrt2\,\mathrm{V}\)。`,
-    `<b>③ 半波平均值</b><br>\(V_{avg,HW}=V_m/\pi=\) {{110/π|V}}，故 B 錯。`,
-    `<b>④ 全波平均值</b><br>\(V_{avg,FW}=2V_m/\pi=\) {{220/π|V}}，故 A 錯。`,
-    `<b>⑤ 比較波形頻率</b><br>全波頻率 \(f_{FW}=2f=\) {{120|Hz}}；半波頻率仍為 {{60|Hz}}，因此選 C。`,
-    `<b>⑥ 週期驗算</b><br>輸入週期約 \(1/60=16.67\,\mathrm{ms}\)，全波輸出相鄰脈波間隔為其一半，即 {{8.33|ms}}，對應 \(120\,\mathrm{Hz}\)。`
+    String.raw`<b>① 由角頻率求輸入頻率</b><br>\(\omega=377\,\mathrm{rad/s}\)，故 \(f=\omega/(2\pi)\approx\) {{60|Hz}}。`,
+    String.raw`<b>② 確認輸入峰值</b><br>由 \(v(t)=110\sin(377t)\)，峰值為 {{110|V}}，不是 \(110\sqrt2\,\mathrm{V}\)。`,
+    String.raw`<b>③ 半波平均值</b><br>\(V_{avg,HW}=V_m/\pi=\) {{110/π|V}}，故 B 錯。`,
+    String.raw`<b>④ 全波平均值</b><br>\(V_{avg,FW}=2V_m/\pi=\) {{220/π|V}}，故 A 錯。`,
+    String.raw`<b>⑤ 比較波形頻率</b><br>全波頻率 \(f_{FW}=2f=\) {{120|Hz}}；半波頻率仍為 {{60|Hz}}，因此選 C。`,
+    String.raw`<b>⑥ 週期驗算</b><br>輸入週期約 \(1/60=16.67\,\mathrm{ms}\)，全波輸出相鄰脈波間隔為其一半，即 {{8.33|ms}}，對應 \(120\,\mathrm{Hz}\)。`
   ]},
   "115-44": {year:115, number:44, topic:"齊納穩壓限流電阻", answer:"B", choices:["450 Ω","500 Ω","650 Ω","700 Ω"], image:"115-44.png", counts:[3,7,11], steps:[
-    `<b>① 求負載電流</b><br>\(I_L=P_L/V_O=60\,\mathrm{mW}/6\,\mathrm{V}=\) {{10|mA}}。`,
-    `<b>② 求齊納最大電流</b><br>\(I_{Z(\max)}=P_{Z(\max)}/V_Z=60\,\mathrm{mW}/6\,\mathrm{V}=\) {{10|mA}}。`,
-    `<b>③ 最小電阻的臨界條件</b><br>電阻最小時串聯電流最大；為不超過額定功率，取 \(I_Z=I_{Z(\max)}\)。`,
-    `<b>④ 求最大串聯電流</b><br>\(I_{S(\max)}=I_L+I_{Z(\max)}=10+10=\) {{20|mA}}。`,
-    `<b>⑤ 求限流電阻最小值</b><br>\(R_{S(\min)}=(V_S-V_Z)/I_{S(\max)}=(16-6)/20\,\mathrm{mA}=\) {{500|Ω}}，選 B。`,
-    `<b>⑥ 代回驗算</b><br>\(I_S=(16-6)/500=\) {{20|mA}}，\(I_Z=20-10=\) {{10|mA}}，\(P_Z=6(10\,\mathrm{mA})=\) {{60|mW}}，恰等於額定值。`
+    String.raw`<b>① 求負載電流</b><br>\(I_L=P_L/V_O=60\,\mathrm{mW}/6\,\mathrm{V}=\) {{10|mA}}。`,
+    String.raw`<b>② 求齊納最大電流</b><br>\(I_{Z(\max)}=P_{Z(\max)}/V_Z=60\,\mathrm{mW}/6\,\mathrm{V}=\) {{10|mA}}。`,
+    String.raw`<b>③ 最小電阻的臨界條件</b><br>電阻最小時串聯電流最大；為不超過額定功率，取 \(I_Z=I_{Z(\max)}\)。`,
+    String.raw`<b>④ 求最大串聯電流</b><br>\(I_{S(\max)}=I_L+I_{Z(\max)}=10+10=\) {{20|mA}}。`,
+    String.raw`<b>⑤ 求限流電阻最小值</b><br>\(R_{S(\min)}=(V_S-V_Z)/I_{S(\max)}=(16-6)/20\,\mathrm{mA}=\) {{500|Ω}}，選 B。`,
+    String.raw`<b>⑥ 代回驗算</b><br>\(I_S=(16-6)/500=\) {{20|mA}}，\(I_Z=20-10=\) {{10|mA}}，\(P_Z=6(10\,\mathrm{mA})=\) {{60|mW}}，恰等於額定值。`
   ]}
 };
 
@@ -110,10 +110,10 @@ const chapter4CLT = {
   "112-45": {
     blanks:[
       {a:"10V|10 V",label:"①",why:"變壓器線性比例必須以實際一次側 100 V 修正每半繞組的額定 12 V。"},
-      {a:"V_m=sqrt(2)V_{rms}|Vm=√2Vrms",label:"②",why:"正弦波峰值等於有效值的 \(\sqrt2\) 倍，整流前先從半繞組有效值換算。"},
-      {a:"V_{O(avg)}=2V_m/pi|Voavg=2Vm/pi",label:"③",why:"中心抽頭全波整流將兩個半週都翻到正向，因此平均值是 \(2V_m/\pi\)。"},
+      {a:"V_m=sqrt(2)V_{rms}|Vm=√2Vrms",label:"②",why:String.raw`正弦波峰值等於有效值的 \(\sqrt2\) 倍，整流前先從半繞組有效值換算。`},
+      {a:"V_{O(avg)}=2V_m/pi|Voavg=2Vm/pi",label:"③",why:String.raw`中心抽頭全波整流將兩個半週都翻到正向，因此平均值是 \(2V_m/\pi\)。`},
       {a:"f_r=2f_s|fr=2fs|100Hz",label:"④",why:"全波整流每一個輸入週期產生兩個輸出脈波，所以漣波頻率加倍。"},
-      {a:"0.01s|10ms",label:"⑤",why:"週期是漣波頻率的倒數，\(1/100=0.01\,s\)。"}
+      {a:"0.01s|10ms",label:"⑤",why:String.raw`週期是漣波頻率的倒數，\(1/100=0.01\,s\)。`}
     ],
     model:String.raw`採理想二極體與理想變壓器模型。一次側額定 \(120\,\mathrm{V}\) 時，每半次級為 \(12\,\mathrm{V_{rms}}\)；實際一次側只有 \(100\,\mathrm{V}\)，故每半繞組有效值為 {{0}}。`,
     derivation:String.raw`<b>步驟 1：由有效值取得峰值</b><br>正弦波關係為 {{1}}。
@@ -135,7 +135,7 @@ const chapter4CLT = {
       {a:"12V|12 V",label:"①",why:"理想變壓器的電壓比等於匝數比，一次側 110 V 對應次級 12 V 有效值。"},
       {a:"V_m=sqrt(2)V_{rms}|Vm=√2Vrms",label:"②",why:"PIV 與整流平均值都應先以次級峰值表示。"},
       {a:"V_{O(avg)}=2V_m/pi|Voavg=2Vm/pi",label:"③",why:"橋式整流也是全波整流，因此平均值使用全波公式。"},
-      {a:"PIV=V_m|PIV=Vm",label:"④",why:"橋式整流中截止二極體承受的最大反向電壓等於次級峰值；不同於中心抽頭的 \(2V_m\)。"},
+      {a:"PIV=V_m|PIV=Vm",label:"④",why:String.raw`橋式整流中截止二極體承受的最大反向電壓等於次級峰值；不同於中心抽頭的 \(2V_m\)。`},
       {a:"24sqrt(2)/pi V,12sqrt(2)V|24√2/πV,12√2V",label:"⑤",why:"將平均值與 PIV 按題目要求順序配對，即對應選項 A。"}
     ],
     model:String.raw`採理想變壓器與理想橋式整流器模型。由匝數比 \(N_1:N_2=110:12\)，當一次側為 \(110\,\mathrm{V_{rms}}\) 時，次級有效值為 {{0}}。`,
@@ -194,8 +194,8 @@ const chapter4CLT = {
     blanks:[
       {a:"K_f=V_{rms}/V_{avg}|Kf=Vrms/Vavg",label:"①",why:"波形因數定義為有效值除以整流平均值，用來描述同一波形的有效值與直流成分比例。"},
       {a:"V_{rms}=V_m/sqrt(2)|Vrms=Vm/√2",label:"②",why:"全波整流只改變正弦波的正負號，平方平均值與原正弦波相同。"},
-      {a:"V_{avg}=2V_m/pi|Vavg=2Vm/π",label:"③",why:"全波整流把兩個半週都轉為正值，所以平均值為 \(2V_m/\pi\)。"},
-      {a:"pi/(2sqrt(2))|π/(2√2)",label:"④",why:"將有效值與平均值代入定義後，峰值 \(V_m\) 應完全約掉。"},
+      {a:"V_{avg}=2V_m/pi|Vavg=2Vm/π",label:"③",why:String.raw`全波整流把兩個半週都轉為正值，所以平均值為 \(2V_m/\pi\)。`},
+      {a:"pi/(2sqrt(2))|π/(2√2)",label:"④",why:String.raw`將有效值與平均值代入定義後，峰值 \(V_m\) 應完全約掉。`},
       {a:"1.111",label:"⑤",why:"波形因數必須大於或等於 1；數值 1.111 符合有效值不小於平均值的基本關係。"}
     ],
     model:String.raw`全波整流輸出為 \(|V_m\sin\omega t|\)。波形因數的控制定義為 {{0}}，所有量都必須取同一輸出波形。`,
@@ -232,7 +232,7 @@ const chapter4CLT = {
       {a:"V_{2,rms}=V_1(N_2/N_1)|V2rms=V1N2/N1",label:"①",why:"理想變壓器的次級電壓由匝數比決定；題圖中的比例是每半次級對一次側。"},
       {a:"I_m=V_m/R_L|Im=Vm/RL",label:"②",why:"理想二極體導通時，每半次級峰值直接加在負載上，峰值電流由歐姆定律得到。"},
       {a:"I_{D(avg)}=I_m/pi|IDavg=Im/π",label:"③",why:"單顆二極體每次只導通半個週期，因此其全週期平均值是半波正弦平均值。"},
-      {a:"sqrt(2)/pi A|√2/π A",label:"④",why:"代入 \(I_m=\sqrt2\,A\) 後得到單顆二極體平均電流。"},
+      {a:"sqrt(2)/pi A|√2/π A",label:"④",why:String.raw`代入 \(I_m=\sqrt2\,A\) 後得到單顆二極體平均電流。`},
       {a:"2I_{D(avg)}=I_{L(avg)}|2IDavg=ILavg",label:"⑤",why:"兩顆二極體交替供應負載，兩者各自的全週期平均電流相加應等於負載平均電流。"}
     ],
     model:String.raw`採理想中心抽頭變壓器與理想二極體。每半次級的有效值由 {{0}} 決定，且每顆二極體只在自己所對應的半週導通。`,
@@ -250,9 +250,9 @@ const chapter4CLT = {
   },
   "115-27": {
     blanks:[
-      {a:"f=omega/(2pi)|f=ω/(2π)",label:"①",why:"角頻率與一般頻率的換算是 \(\omega=2\pi f\)。"},
-      {a:"V_m=110V|Vm=110V",label:"②",why:"題目已直接以 \(110\sin(377t)\) 給瞬時波形，所以 110 是峰值，不需再乘 \(\sqrt2\)。"},
-      {a:"V_{avg,HW}=V_m/pi|VavgHW=Vm/π",label:"③",why:"半波整流只有一個半週為正，其全週期平均值為 \(V_m/\pi\)。"},
+      {a:"f=omega/(2pi)|f=ω/(2π)",label:"①",why:String.raw`角頻率與一般頻率的換算是 \(\omega=2\pi f\)。`},
+      {a:"V_m=110V|Vm=110V",label:"②",why:String.raw`題目已直接以 \(110\sin(377t)\) 給瞬時波形，所以 110 是峰值，不需再乘 \(\sqrt2\)。`},
+      {a:"V_{avg,HW}=V_m/pi|VavgHW=Vm/π",label:"③",why:String.raw`半波整流只有一個半週為正，其全週期平均值為 \(V_m/\pi\)。`},
       {a:"V_{avg,FW}=2V_m/pi|VavgFW=2Vm/π",label:"④",why:"全波整流的兩個半週都貢獻正面積，所以平均值加倍。"},
       {a:"f_{FW}=2f=120Hz|fFW=120Hz",label:"⑤",why:"全波整流每個輸入週期產生兩個脈波，所以輸出波形頻率加倍。"}
     ],
@@ -267,13 +267,13 @@ const chapter4CLT = {
 \[T_{in}=\frac1{60}=16.67\,\mathrm{ms}\]
 \[T_{FW}=\frac{T_{in}}2=8.33\,\mathrm{ms}\]
 其倒數確為 \(120\,\mathrm{Hz}\)。`,
-    self:"看到 110 V 時，為什麼不能一律乘 \(\sqrt2\)？請比較『直接給瞬時式振幅』與『標示有效值』兩種題目敘述。",
+    self:String.raw`看到 110 V 時，為什麼不能一律乘 \(\sqrt2\)？請比較『直接給瞬時式振幅』與『標示有效值』兩種題目敘述。`,
     challenge:String.raw`若輸入改為 \(v(t)=170\sin(314t)\,\mathrm{V}\)，分別求半波與全波的平均值及波形頻率。<br><b>第一步提示：</b>先由係數辨認 \(V_m\)，再由 \(314=2\pi f\) 求頻率。`
   },
   "115-44": {
     blanks:[
       {a:"V_O=V_Z|Vo=Vz|6V",label:"①",why:"穩壓時齊納與負載並聯，負載電壓等於齊納電壓。"},
-      {a:"I_L=P_L/V_O|IL=PL/Vo",label:"②",why:"已知負載功率與電壓時，由 \(P=VI\) 求負載電流。"},
+      {a:"I_L=P_L/V_O|IL=PL/Vo",label:"②",why:String.raw`已知負載功率與電壓時，由 \(P=VI\) 求負載電流。`},
       {a:"I_Z=I_{Z(max)}|Iz=Izmax",label:"③",why:"要求最小限流電阻時，電流最大；安全邊界是齊納剛好達到最大容許功率。"},
       {a:"I_S=I_L+I_Z|Is=IL+IZ",label:"④",why:"輸出節點 KCL 決定串聯電阻必須同時供應負載與齊納。"},
       {a:"500ohm|500Ω|500 ohm",label:"⑤",why:"最小電阻對應最大容許總電流，代回後齊納功率恰等於 60 mW。"}
@@ -291,7 +291,7 @@ const chapter4CLT = {
 \[I_S=\frac{16-6}{500}=20\,\mathrm{mA}\]
 \[I_Z=20-10=10\,\mathrm{mA}\]
 \[P_Z=6(10\,\mathrm{mA})=60\,\mathrm{mW}\]`,
-    self:"若只用 \((V_S-V_Z)/I_{Z(max)}\) 計算，為什麼會得到錯誤電阻？請指出被漏掉的電流支路。",
+    self:String.raw`若只用 \((V_S-V_Z)/I_{Z(max)}\) 計算，為什麼會得到錯誤電阻？請指出被漏掉的電流支路。`,
     challenge:String.raw`若負載功率降為 \(30\,\mathrm{mW}\)，其他條件不變，重新求最小安全限流電阻。<br><b>第一步提示：</b>先用 \(I_L=P_L/V_O\) 重算負載電流。`
   }
 };
@@ -331,7 +331,7 @@ const chapter4CLT = {
   function showTeacherKey(){
     const key=document.getElementById("teacherKey");if(!key||!clt)return;
     key.hidden=false;
-    key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${clt.blanks.slice(0,blankLimit()).map(item=>`<li><b>${item.label}【標準答案】：\(${item.a.split("|")[0]}\)</b><br><span>【思維線索（Why）】：${item.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${clt.self}</div>`;
+    key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${clt.blanks.slice(0,blankLimit()).map(item=>`<li><b>${item.label}【標準答案】：\\(${item.a.split("|")[0]}\\)</b><br><span>【思維線索（Why）】：${item.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${clt.self}</div>`;
     window.MathJax?.typesetPromise?.([key]);
   }
   function solution(){

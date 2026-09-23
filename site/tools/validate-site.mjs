@@ -6,6 +6,8 @@ const index = fs.readFileSync(path.join(root, "quiz.html"), "utf8");
 const extra = fs.readFileSync(path.join(root, "data", "other-questions.js"), "utf8");
 const chapter4 = fs.readFileSync(path.join(root, "data", "chapter4-remaining.js"), "utf8");
 const chapter5CLT1 = fs.readFileSync(path.join(root, "data", "chapter5-clt-batch1.js"), "utf8");
+const chapter5CLT2 = fs.readFileSync(path.join(root, "data", "chapter5-clt-batch2.js"), "utf8");
+const chapter5CLT3 = fs.readFileSync(path.join(root, "data", "chapter5-clt-batch3.js"), "utf8");
 const chapter6 = fs.readFileSync(path.join(root, "data", "chapter6-questions.js"), "utf8");
 const chapter7 = fs.readFileSync(path.join(root, "data", "chapter7-questions.js"), "utf8");
 const chapter7Page = fs.readFileSync(path.join(root, "chapters", "chapter-7.html"), "utf8");
@@ -24,16 +26,39 @@ for (const [i, script] of inlineScripts.entries()) {
 try { new Function(extra); } catch (error) { errors.push(`other-questions.js: ${error.message}`); }
 try { new Function(chapter4); } catch (error) { errors.push(`chapter4-remaining.js: ${error.message}`); }
 try { new Function(chapter5CLT1); } catch (error) { errors.push(`chapter5-clt-batch1.js: ${error.message}`); }
+try { new Function(chapter5CLT2); } catch (error) { errors.push(`chapter5-clt-batch2.js: ${error.message}`); }
+try { new Function(chapter5CLT3); } catch (error) { errors.push(`chapter5-clt-batch3.js: ${error.message}`); }
 try { new Function(chapter6); } catch (error) { errors.push(`chapter6-questions.js: ${error.message}`); }
 try { new Function(chapter7); } catch (error) { errors.push(`chapter7-questions.js: ${error.message}`); }
 try { new Function(chapter3); } catch (error) { errors.push(`chapter3-questions.js: ${error.message}`); }
 
+// Runtime LaTeX audit: JavaScript string escaping must preserve MathJax delimiters.
+const chapter5Runtime=new Function("location",`${chapter5CLT1}\n${chapter5CLT2}\n${chapter5CLT3}\nreturn [chapter5CLTBatch1,chapter5CLTBatch2,chapter5CLTBatch3];`)({search:""});
+for(const [batchName,records] of [
+  ["Chapter 5 batch 1",chapter5Runtime[0]],
+  ["Chapter 5 batch 2",chapter5Runtime[1]],
+  ["Chapter 5 batch 3",chapter5Runtime[2]]
+]){
+  for(const [id,record] of Object.entries(records)){
+    const texts=[record.model,record.derivation,record.self,record.challenge,...record.blanks.map(item=>item.why)].filter(Boolean);
+    for(const [i,text] of texts.entries()){
+      assert((text.match(/\\\(/g)||[]).length===(text.match(/\\\)/g)||[]).length,`${batchName} ${id} text ${i+1}: unbalanced inline LaTeX delimiters`);
+      assert((text.match(/\\\[/g)||[]).length===(text.match(/\\\]/g)||[]).length,`${batchName} ${id} text ${i+1}: unbalanced display LaTeX delimiters`);
+      assert(!/(^|[^\\])\([^)]*_[^)]*\)/.test(text),`${batchName} ${id} text ${i+1}: raw parenthesized subscript expression found`);
+    }
+  }
+}
+assert(chapter5CLT2.includes('why:String.raw`由定義 \\(V_{GS}=V_G-V_S\\)'),"113-35 V_G relation must use a raw LaTeX string");
+
 // Required content and assets.
 assert(index.includes("MathJax"), "MathJax configuration missing");
 assert(index.includes("tex-svg.js"), "MathJax renderer missing");
-assert(index.includes('src="data/other-questions.js?v=4"'), "data/other-questions.js is not loaded");
-assert(index.includes('src="data/chapter4-remaining.js?v=5"'), "data/chapter4-remaining.js is not loaded");
-assert(index.includes('src="data/chapter5-clt-batch1.js?v=1"'), "data/chapter5-clt-batch1.js is not loaded");
+assert(index.includes('src="data/other-questions.js?v=5"'), "data/other-questions.js is not loaded");
+assert(index.includes('src="data/chapter4-remaining.js?v=6"'), "data/chapter4-remaining.js is not loaded");
+assert(index.includes('src="data/chapter5-clt-batch1.js?v=4"'), "data/chapter5-clt-batch1.js is not loaded");
+assert(index.includes('src="data/chapter5-clt-batch2.js?v=3"'), "data/chapter5-clt-batch2.js is not loaded");
+assert(index.includes('src="data/chapter5-clt-batch3.js?v=2"'), "data/chapter5-clt-batch3.js is not loaded");
+assert(index.includes('src="data/chapter2-questions.js?v=3"'), "data/chapter2-questions.js is not loaded");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=2"'), "data/chapter7-questions.js is not loaded");
 assert(index.includes('src="data/chapter3-questions.js?v=6"'), "data/chapter3-questions.js is not loaded");
@@ -69,6 +94,12 @@ for (const id of chapter4Ids) {
 const chapter5CLT1Ids=["111-35","111-48","112-32","112-33","112-34"];
 for(const id of chapter5CLT1Ids){assert(chapter5CLT1.includes(`"${id}":{`),`${id}: Chapter 5 CLT batch 1 record missing`)}
 assert((chapter5CLT1.match(/label:"[①②③④⑤]"/g)||[]).length===25,"Chapter 5 CLT batch 1 must provide five blanks per question");
+const chapter5CLT2Ids=["113-32","113-35","113-46","113-47","114-31"];
+for(const id of chapter5CLT2Ids){assert(chapter5CLT2.includes(`"${id}":{`),`${id}: Chapter 5 CLT batch 2 record missing`)}
+assert((chapter5CLT2.match(/label:"[①②③④⑤]"/g)||[]).length===25,"Chapter 5 CLT batch 2 must provide five blanks per question");
+const chapter5CLT3Ids=["114-32","114-33","114-34","115-32","115-35","115-36"];
+for(const id of chapter5CLT3Ids){assert(chapter5CLT3.includes(`"${id}":{`),`${id}: Chapter 5 CLT batch 3 record missing`)}
+assert((chapter5CLT3.match(/label:"[①②③④⑤]"/g)||[]).length===30,"Chapter 5 CLT batch 3 must provide five blanks per question");
 assert((chapter5CLT1.match(/Faded Step to Independence/g)||[]).length===1,"Chapter 5 CLT batch 1 shared migration renderer missing");
 assert((chapter4.match(/<b>⑥/g) || []).length === 10, "remaining Chapter 4 questions must each contain six complete steps");
 for (const [id, answer] of Object.entries({"112-28":"A","112-45":"D","113-26":"A","113-43":"D","113-44":"D","114-27":"C","114-28":"D","114-42":"A","115-27":"C","115-44":"B"})) {
@@ -127,8 +158,10 @@ const q27Templates = [...q27Section.matchAll(/<div class="step">([\s\S]*?)<\/div
 const questionData = extra.split("let selectedQuestion")[0];
 const rawTemplates = [...questionData.matchAll(/String\.raw`([\s\S]*?)`/g)].map(match => match[1]);
 assert(q27Templates.length === 18, `expected 18 question-27 solution steps, found ${q27Templates.length}`);
-assert(rawTemplates.length === 36, `expected 36 legacy and Chapter 4 CLT templates, found ${rawTemplates.length}`);
-const legacyChapter4Section=extra.match(/const legacyChapter4CLT=\{([\s\S]*?)\n\};\nconst params/)?.[1]??"";
+assert(rawTemplates.length >= 36, `expected at least 36 legacy and Chapter 4 CLT templates, found ${rawTemplates.length}`);
+const legacyStart=extra.indexOf("const legacyChapter4CLT={");
+const legacyEnd=extra.indexOf("const params=",legacyStart);
+const legacyChapter4Section=legacyStart>=0&&legacyEnd>legacyStart?extra.slice(legacyStart,legacyEnd):"";
 assert(legacyChapter4Section.includes("27:{")&&legacyChapter4Section.includes("43:{"),"111-27 and 111-43 CLT records missing");
 assert((legacyChapter4Section.match(/label:"[①②③④⑤]"/g)||[]).length===10,"111-27 and 111-43 must each provide five CLT blanks");
 assert((legacyChapter4Section.match(/Teacher's Key/g)||[]).length===0,"Teacher's Key should be rendered once by the shared renderer");

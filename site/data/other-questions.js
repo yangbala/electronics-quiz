@@ -51,7 +51,7 @@ const legacyChapter4CLT={
       {a:"I_S=I_Z+I_L|Is=Iz+Il",label:"②",why:"串聯電阻電流在輸出節點分流成齊納電流與負載電流，這是節點 KCL。"},
       {a:"I_Z=I_{ZK}|Iz=Izk|1mA",label:"③",why:"負載電阻最小時負載電流最大，臨界穩壓條件是齊納仍保有膝點電流。"},
       {a:"I_{L(max)}=I_S-I_{ZK}|ILmax=Is-Izk",label:"④",why:"由輸出節點 KCL 解出最大可供負載的電流，不能把全部串聯電流都交給負載。"},
-      {a:"1.2kΩ|1.2kohm|1200Ω",label:"⑤",why:"由 \(R_L=V_O/I_L\) 得到最小負載電阻，並代回確認齊納電流恰為 1 mA。"}
+      {a:"1.2kΩ|1.2kohm|1200Ω",label:"⑤",why:String.raw`由 \(R_L=V_O/I_L\) 得到最小負載電阻，並代回確認齊納電流恰為 1 mA。`}
     ],
     model:String.raw`忽略齊納內阻，並假設二極體仍在崩潰穩壓區，因此 {{0}}。輸出節點的核心電流關係為 {{1}}。`,
     derivation:String.raw`<b>步驟 1：求串聯支路電流</b>
@@ -73,7 +73,7 @@ const legacyChapter4CLT={
     blanks:[
       {a:"V_{DC}=(V_{max}+V_{min})/2|VDC=(Vmax+Vmin)/2",label:"①",why:"近似鋸齒漣波以最大、最小值的中點作為直流分量。"},
       {a:"V_{r(pp)}=V_{max}-V_{min}|Vrpp=Vmax-Vmin",label:"②",why:"峰對峰漣波定義就是輸出波形最大值與最小值之差。"},
-      {a:"V_{r(rms)}=V_{r(pp)}/(2sqrt(3))|Vrrms=Vrpp/(2√3)",label:"③",why:"零平均三角波若峰對峰值為 \(V_{r(pp)}\)，其峰值為一半，有效值再除以 \(\sqrt3\)。"},
+      {a:"V_{r(rms)}=V_{r(pp)}/(2sqrt(3))|Vrrms=Vrpp/(2√3)",label:"③",why:String.raw`零平均三角波若峰對峰值為 \(V_{r(pp)}\)，其峰值為一半，有效值再除以 \(\sqrt3\)。`},
       {a:"r=V_{r(rms)}/V_{DC}|r=Vrrms/VDC",label:"④",why:"漣波率是交流漣波有效值相對於直流分量的比值。"},
       {a:"8.25%|8%|0.0825",label:"⑤",why:"計算結果約 8.25%，依選項取約 8%，對應 B。"}
     ],
@@ -125,7 +125,7 @@ const cltLimit=()=>({2:3,3:4,4:5}[level]||0);
 const cltMathContext=(html,offset)=>{const before=html.slice(0,offset);const inline=(before.match(/\\\(/g)||[]).length>(before.match(/\\\)/g)||[]).length;const display=(before.match(/\\\[/g)||[]).length>(before.match(/\\\]/g)||[]).length;return inline?"inline":display?"display":null};
 function cltReplace(html,q){return html.replace(/\{\{(\d+)\}\}/g,(_,i,offset)=>{const n=Number(i),item=q.blanks[n];const markup=n>=cltLimit()?`<strong>\(${item.a.split("|")[0]}\)</strong>`:`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;const context=cltMathContext(html,offset);return context==="inline"?`\)${markup}\(`:context==="display"?`\]${markup}\[` : markup})}
 function cltContent(q){return `<div class="scaffold"><section class="scaffoldBlock"><h3>一、電路分析起手式（物理建模）</h3><div>${cltReplace(q.model,q)}</div></section><section class="scaffoldBlock"><h3>二、核心電路定律推導（鷹架填空＋代數卸載）</h3><div>${cltReplace(q.derivation,q)}</div></section><section class="scaffoldBlock teacherKey" id="teacherKey" hidden></section><section class="scaffoldBlock"><h3>四、自主遷移挑戰題（Faded Step to Independence）</h3><div>${q.challenge}</div></section></div>`}
-function showLegacyTeacherKey(q){const key=document.getElementById("teacherKey");if(!key)return;key.hidden=false;key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${q.blanks.slice(0,cltLimit()).map(item=>`<li><b>${item.label}【標準答案】：\(${item.a.split("|")[0]}\)</b><br><span>【思維線索（Why）】：${item.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${q.self}</div>`;window.MathJax?.typesetPromise?.([key])}
+function showLegacyTeacherKey(q){const key=document.getElementById("teacherKey");if(!key)return;key.hidden=false;key.innerHTML=`<h3>三、填空解答與思維導引（Teacher's Key）</h3><ol class="keyList">${q.blanks.slice(0,cltLimit()).map(item=>`<li><b>${item.label}【標準答案】：\\(${item.a.split("|")[0]}\\)</b><br><span>【思維線索（Why）】：${item.why}</span></li>`).join("")}</ol><div class="selfPrompt"><b>電路物理觀念解析（Self-Explanation Prompt）</b><br>${q.self}</div>`;window.MathJax?.typesetPromise?.([key])}
 content = function(){const clt=legacyChapter4CLT[selectedQuestion];if(level>1&&clt)return cltContent(clt);return selectedQuestion === 27 ? originalContent() : otherContent(moreQuestions[selectedQuestion]); };
 const originalRender = render;
 render = function(){
