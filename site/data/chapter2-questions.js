@@ -182,7 +182,7 @@ const chapter2Questions = {
     img.src=location.protocol==="file:"?`${root}chapter2-${id}.png`:`assets/chapter2/chapter2-${id}.png`; img.alt=`${id} 原始試題切圖`;
     const nav=document.getElementById("questionTabs"); if(nav)nav.innerHTML=Object.keys(chapter2Questions).map(k=>`<button class="chapterQuestion ${k===id?"active":""}" onclick="location.href='?id=${k}'">${k}</button>`).join("");
     if(typeof renderStats==="function")renderStats();
-    if(window.MathJax?.typesetPromise){window.MathJax.typesetClear?.([$("answerArea")]);window.MathJax.typesetPromise([$("answerArea")]);}
+    typesetAnswerArea();
   }
   render=render2;
   $("check").onclick=()=>{

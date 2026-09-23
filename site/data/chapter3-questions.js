@@ -114,7 +114,7 @@ const chapter3Questions = {
     const nav=document.getElementById("questionTabs");
     if(nav)nav.innerHTML=Object.keys(chapter3Questions).map(key=>`<button class="chapterQuestion ${key===id?"active":""}" onclick="location.href='?id=${key}'">${key}</button>`).join("");
     if(typeof renderStats==="function")renderStats();
-    if(window.MathJax?.typesetPromise){window.MathJax.typesetClear?.([document.getElementById("answerArea")]);window.MathJax.typesetPromise([document.getElementById("answerArea")]);}
+    typesetAnswerArea();
   }
   render=renderChapter3;
   document.getElementById("check").onclick=()=>{

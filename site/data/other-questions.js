@@ -145,7 +145,7 @@ render = function(){
   nav?.querySelectorAll("button").forEach(b=>b.onclick=()=>{selectedQuestion=Number(b.dataset.question);render()});
   if(!(level>1&&legacyChapter4CLT[selectedQuestion]))decorateUnitInputs();
   renderStats();
-  if(window.MathJax?.typesetPromise){MathJax.typesetClear?.([document.getElementById("answerArea")]);MathJax.typesetPromise([document.getElementById("answerArea")]);}
+  typesetAnswerArea();
 };
 const unitPlans={
   27:{2:["V","mA","mA","kΩ"],3:["V","mA","V","mA","mA","kΩ","mA"],4:["V","kΩ","V","mA","V","V","V","V","mA","mA","mA","mA","kΩ","mA"]},

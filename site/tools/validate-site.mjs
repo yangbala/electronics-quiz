@@ -53,22 +53,26 @@ assert(chapter5CLT2.includes('why:String.raw`由定義 \\(V_{GS}=V_G-V_S\\)'),"1
 // Required content and assets.
 assert(index.includes("MathJax"), "MathJax configuration missing");
 assert(index.includes("tex-svg.js"), "MathJax renderer missing");
-assert(index.includes('src="data/other-questions.js?v=5"'), "data/other-questions.js is not loaded");
+assert(index.includes('src="data/other-questions.js?v=6"'), "data/other-questions.js is not loaded");
 assert(index.includes('src="data/chapter4-remaining.js?v=6"'), "data/chapter4-remaining.js is not loaded");
-assert(index.includes('src="data/chapter5-clt-batch1.js?v=5"'), "data/chapter5-clt-batch1.js is not loaded");
+assert(index.includes('src="data/chapter5-clt-batch1.js?v=6"'), "data/chapter5-clt-batch1.js is not loaded");
 assert(index.includes('src="data/chapter5-clt-batch2.js?v=4"'), "data/chapter5-clt-batch2.js is not loaded");
 assert(index.includes('src="data/chapter5-clt-batch3.js?v=2"'), "data/chapter5-clt-batch3.js is not loaded");
 assert(index.includes('src="data/chapter5-questions.js?v=3"'), "data/chapter5-questions.js is not loaded");
-assert(index.includes('src="data/chapter2-questions.js?v=6"'), "data/chapter2-questions.js is not loaded");
+assert(index.includes('src="data/chapter2-questions.js?v=7"'), "data/chapter2-questions.js is not loaded");
 assert(fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8").includes('if(n>=limit())return context?`\\\\boxed{${shown}}`'),"Chapter 2 revealed answers must stay inside their current LaTeX formula");
 assert(index.includes('.equationLine{display:flex'),"single-line equation-and-answer layout missing");
 assert(index.includes('.equationRun{display:inline-flex'),"shared non-wrapping equation-answer layout missing");
 assert(index.includes('function keepEquationAnswersTogether(root)'),"shared equation-answer grouping function missing");
 assert(index.includes("MathJax.typesetPromise([root]).then(()=>keepEquationAnswersTogether(root))"),"equation-answer grouping must run after MathJax rendering");
+for(const file of ["other-questions.js","chapter2-questions.js","chapter3-questions.js","chapter5-clt-batch1.js"]){
+  const source=fs.readFileSync(path.join(root,"data",file),"utf8");
+  assert(!/typesetPromise(?:\?\.)?\(\[[^\]]*answerArea/.test(source),`${file}: answer-area MathJax rendering must use typesetAnswerArea()`);
+}
 assert(fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8").includes('<div class="equationLine"><span>\\(8=2\\dfrac{R_f}{R}'),"115-47 target equation must use the single-line layout");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=3"'), "data/chapter7-questions.js is not loaded");
-assert(index.includes('src="data/chapter3-questions.js?v=6"'), "data/chapter3-questions.js is not loaded");
+assert(index.includes('src="data/chapter3-questions.js?v=7"'), "data/chapter3-questions.js is not loaded");
 for(const [name,source] of [["Chapter 2",fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8")],["Chapter 5 batch 1",chapter5CLT1],["Chapter 5 batch 2",chapter5CLT2],["Chapter 7",chapter7]]){
   assert(!/\\\([^)]*<[A-Za-z\\]/.test(source),`${name}: literal < before a LaTeX symbol can be parsed as an HTML tag; use \\lt`);
 }
