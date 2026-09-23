@@ -316,9 +316,9 @@ const chapter4CLT = {
   };
   const replaceCLT=html=>html.replace(/\{\{(\d+)\}\}/g,(_,i,offset)=>{
     const n=Number(i),item=clt.blanks[n];
-    const markup=n>=blankLimit()?`<strong>\(${item.a.split("|")[0]}\)</strong>`:`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;
+    const markup=n>=blankLimit()?`<strong>\\(${item.a.split("|")[0]}\\)</strong>`:`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;
     const context=mathContext(html,offset);
-    return context==="inline"?`\)${markup}\(`:context==="display"?`\]${markup}\[` : markup;
+    return context==="inline"?`\\)${markup}\\(`:context==="display"?`\\]${markup}\\[` : markup;
   });
   function scaffold(){
     return `<div class="scaffold">
