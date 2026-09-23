@@ -63,13 +63,15 @@ const chapter3Questions = {
   if([1,2,3,4].includes(requestedLevel))level=requestedLevel;
   const blankLimit=()=>({2:3,3:4,4:5}[level]||0);
   const normalize=value=>value.trim().replace(/\s+/g,"").toLowerCase();
+  const mathContext=(html,offset)=>{const before=html.slice(0,offset),inline=(before.match(/\\\(/g)||[]).length>(before.match(/\\\)/g)||[]).length,display=(before.match(/\\\[/g)||[]).length>(before.match(/\\\]/g)||[]).length;return inline?"inline":display?"display":null};
   function scaffold(){
     let token=0;
     const limit=blankLimit();
-    const replace=html=>html.replace(/\{\{(\d+)\}\}/g,(_,index)=>{
+    const replace=html=>html.replace(/\{\{(\d+)\}\}/g,(_,index,offset)=>{
       const item=q.blanks[Number(index)],current=++token;
-      if(current>limit)return `<strong>${item.answer.split("|")[0]}</strong>`;
-      return `<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.answer}" aria-label="填空 ${item.label}"> ]</span>`;
+      const answer=item.answer.split("|")[0],context=mathContext(html,offset);
+      const markup=current>limit?`<strong>${context?`\\(${answer}\\)`:answer}</strong>`:`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.answer}" aria-label="填空 ${item.label}"> ]</span>`;
+      return context==="inline"?`\\)${markup}\\(`:context==="display"?`\\]${markup}\\[` :markup;
     });
     return `<div class="scaffold">${q.blocks.map(block=>{
       if(block.key)return `<section class="scaffoldBlock teacherKey" id="teacherKey" hidden><h3>${block.title}</h3><p>送出答案後顯示每一格的標準答案與物理線索。</p></section>`;

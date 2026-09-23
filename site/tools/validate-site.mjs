@@ -72,7 +72,8 @@ for(const file of ["other-questions.js","chapter2-questions.js","chapter3-questi
 assert(fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8").includes('<div class="equationLine"><span>\\(8=2\\dfrac{R_f}{R}'),"115-47 target equation must use the single-line layout");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=3"'), "data/chapter7-questions.js is not loaded");
-assert(index.includes('src="data/chapter3-questions.js?v=7"'), "data/chapter3-questions.js is not loaded");
+assert(index.includes('src="data/chapter3-questions.js?v=8"'), "data/chapter3-questions.js is not loaded");
+assert(chapter3.includes('context==="display"?`\\\\]${markup}\\\\[`'),"Chapter 3 inputs inside display math must be moved outside LaTeX before rendering");
 for(const [name,source] of [["Chapter 2",fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8")],["Chapter 5 batch 1",chapter5CLT1],["Chapter 5 batch 2",chapter5CLT2],["Chapter 7",chapter7]]){
   assert(!/\\\([^)]*<[A-Za-z\\]/.test(source),`${name}: literal < before a LaTeX symbol can be parsed as an HTML tag; use \\lt`);
 }
