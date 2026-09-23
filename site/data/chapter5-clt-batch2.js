@@ -24,7 +24,7 @@ self:String.raw`為什麼本題不能把 \(V_G\) 直接當作 \(V_{GS}\)？請�
 {a:"V_{GS}=3V,V_{DS}=1.5V",label:"④",why:String.raw`此組數值有 \(V_{OV}=0.5\,\mathrm{V}\)，且 \(1.5\ge0.5\)，符合飽和區。`},
 {a:"C",label:"⑤",why:String.raw`A、B 的 \(V_{DS}\) 小於 \(V_{OV}\)，D 則未達臨界電壓，只有 C 合格。`}],
 model:String.raw`對增強型 N 通道 MOSFET，先檢查導通條件 {{0}}，再定義 {{1}}。`,
-derivation:String.raw`<b>步驟 1：寫出飽和區判準</b><br>導通後還必須滿足 {{2}}。<br><br><b>步驟 2：逐項檢查</b>\[\begin{aligned}\text{A: }&V_{OV}=5-2.5=2.5\,\mathrm{V},\quad1<2.5\quad(\text{三極區})\\\text{B: }&V_{OV}=4-2.5=1.5\,\mathrm{V},\quad1.2<1.5\quad(\text{三極區})\\\text{C: }&V_{OV}=3-2.5=0.5\,\mathrm{V},\quad1.5\ge0.5\quad(\text{飽和區})\\\text{D: }&V_{GS}=2<2.5\,\mathrm{V}\quad(\text{截止})\end{aligned}\]<b>步驟 3：提煉答案</b><br>符合條件的是 {{3}}，所以選 {{4}}。`,
+derivation:String.raw`<b>步驟 1：寫出飽和區判準</b><br>導通後還必須滿足 {{2}}。<br><br><b>步驟 2：逐項檢查</b>\[\begin{aligned}\text{A: }&V_{OV}=5-2.5=2.5\,\mathrm{V},\quad1\lt 2.5\quad(\text{三極區})\\\text{B: }&V_{OV}=4-2.5=1.5\,\mathrm{V},\quad1.2\lt 1.5\quad(\text{三極區})\\\text{C: }&V_{OV}=3-2.5=0.5\,\mathrm{V},\quad1.5\ge0.5\quad(\text{飽和區})\\\text{D: }&V_{GS}=2\lt 2.5\,\mathrm{V}\quad(\text{截止})\end{aligned}\]<b>步驟 3：提煉答案</b><br>符合條件的是 {{3}}，所以選 {{4}}。`,
 self:String.raw`為什麼 \(V_{DS}\) 很大仍不保證元件導通？請區分『形成通道』與『通道夾止』兩個條件。`,challenge:String.raw`若臨界電壓改為 \(V_t=2.0\,\mathrm{V}\)，四個選項中哪些會落在飽和區？<br><b>第一步提示：</b>逐項先算新的 \(V_{OV}=V_{GS}-V_t\)。`},
 "113-47":{blanks:[
 {a:"V_{GS}=V_G-V_S",label:"①",why:"MOSFET 的控制量是閘極相對源極的電壓，而不是閘極對地電壓。"},

@@ -23,7 +23,7 @@ String.raw`<b>⑥ 求電流增益</b><br>\(A_i=\dfrac{i_o}{i_i}=\dfrac{0.6667}{5
 String.raw`<b>⑦ 數值驗證</b><br>令 \(v_s=1\,\mathrm{V}\)，則 \(i_i={{5|mA}}\)、\(i_o={{0.667|mA}}\)，兩者比值仍為 \(0.133\)。`]},
 "115-33":{year:115,number:33,topic:"JFET 共源極放大器電壓增益",answer:"D",choices:["7.5","2.5","−2.5","−7.5"],counts:[2,4,6],steps:[
 String.raw`<b>① 求閘源電壓</b><br>源極接地且閘極為 \(-V_{GG}\)，故 \(V_{GS}={{-2|V}}\)。`,
-String.raw`<b>② 檢查工作範圍</b><br>\(V_P=-4\,\mathrm{V}<V_{GS}=-2\,\mathrm{V}<0\)，元件位於可放大的夾止區。`,
+String.raw`<b>② 檢查工作範圍</b><br>\(V_P=-4\,\mathrm{V}\lt V_{GS}=-2\,\mathrm{V}\lt 0\)，元件位於可放大的夾止區。`,
 String.raw`<b>③ 求零偏壓轉移電導</b><br>\(g_{m0}=\dfrac{2I_{DSS}}{|V_P|}=\dfrac{2(10)}{4}={{5|mS}}\)。`,
 String.raw`<b>④ 求工作點轉移電導</b><br>\(g_m=g_{m0}\left(1-\dfrac{V_{GS}}{V_P}\right)=5\left(1-\dfrac{-2}{-4}\right)={{2.5|mS}}\)。`,
 String.raw`<b>⑤ 求中頻電壓增益</b><br>\(A_v=-g_mR_D=-(2.5\,\mathrm{mS})(3\,\mathrm{k}\Omega)={{-7.5|—}}\)，故選 D。`,

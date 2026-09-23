@@ -4,7 +4,7 @@ String.raw`<b>① 改用 P 通道常用電壓</b><br>\(V_{SG}=V_S-V_G=3.3-0=\) {
 String.raw`<b>② 檢查是否導通</b><br>\(V_{SG}=3.3\,\mathrm{V}>|V_t|=\) {{0.5|V}}，故不是截止區。`,
 String.raw`<b>③ 求過驅電壓</b><br>\(V_{OV}=V_{SG}-|V_t|=3.3-0.5=\) {{2.8|V}}。`,
 String.raw`<b>④ 求源汲極電壓</b><br>\(V_{SD}=V_S-V_D=3.3-3.0=\) {{0.3|V}}。`,
-String.raw`<b>⑤ 判斷工作區</b><br>因 \(0<V_{SD}<V_{OV}\)，即 \(0.3<2.8\)，工作於 {{歐姆區|—}}，選 B。`,
+String.raw`<b>⑤ 判斷工作區</b><br>因 \(0\lt V_{SD}\lt V_{OV}\)，即 \(0.3\lt 2.8\)，工作於 {{歐姆區|—}}，選 B。`,
 String.raw`<b>⑥ 邊界驗算</b><br>P 通道飽和須 \(V_{SD}\ge V_{SG}-|V_t|=2.8\,\mathrm{V}\)；實際僅 {{0.3|V}}，故不在飽和區。`]},
 "111-48":{year:111,number:48,topic:"增強型 MOSFET 轉移電導",answer:"C",choices:["4 mA/V","6 mA/V","8 mA/V","10 mA/V"],counts:[3,6,9],steps:[
 String.raw`<b>① 確認飽和區公式</b><br>題目指定飽和區，採 \(I_D=K(V_{GS}-V_t)^2\)。`,

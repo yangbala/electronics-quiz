@@ -55,13 +55,17 @@ assert(index.includes("MathJax"), "MathJax configuration missing");
 assert(index.includes("tex-svg.js"), "MathJax renderer missing");
 assert(index.includes('src="data/other-questions.js?v=5"'), "data/other-questions.js is not loaded");
 assert(index.includes('src="data/chapter4-remaining.js?v=6"'), "data/chapter4-remaining.js is not loaded");
-assert(index.includes('src="data/chapter5-clt-batch1.js?v=4"'), "data/chapter5-clt-batch1.js is not loaded");
-assert(index.includes('src="data/chapter5-clt-batch2.js?v=3"'), "data/chapter5-clt-batch2.js is not loaded");
+assert(index.includes('src="data/chapter5-clt-batch1.js?v=5"'), "data/chapter5-clt-batch1.js is not loaded");
+assert(index.includes('src="data/chapter5-clt-batch2.js?v=4"'), "data/chapter5-clt-batch2.js is not loaded");
 assert(index.includes('src="data/chapter5-clt-batch3.js?v=2"'), "data/chapter5-clt-batch3.js is not loaded");
-assert(index.includes('src="data/chapter2-questions.js?v=3"'), "data/chapter2-questions.js is not loaded");
+assert(index.includes('src="data/chapter5-questions.js?v=3"'), "data/chapter5-questions.js is not loaded");
+assert(index.includes('src="data/chapter2-questions.js?v=4"'), "data/chapter2-questions.js is not loaded");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
-assert(index.includes('src="data/chapter7-questions.js?v=2"'), "data/chapter7-questions.js is not loaded");
+assert(index.includes('src="data/chapter7-questions.js?v=3"'), "data/chapter7-questions.js is not loaded");
 assert(index.includes('src="data/chapter3-questions.js?v=6"'), "data/chapter3-questions.js is not loaded");
+for(const [name,source] of [["Chapter 2",fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8")],["Chapter 5 batch 1",chapter5CLT1],["Chapter 5 batch 2",chapter5CLT2],["Chapter 7",chapter7]]){
+  assert(!/\\\([^)]*<[A-Za-z\\]/.test(source),`${name}: literal < before a LaTeX symbol can be parsed as an HTML tag; use \\lt`);
+}
 
 const chapter3Answers={"112-27":"C","114-26":"B","115-1":"B"};
 for(const [id,answer] of Object.entries(chapter3Answers)){

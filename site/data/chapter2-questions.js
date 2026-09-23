@@ -40,7 +40,7 @@ const chapter2Questions = {
       {a:"6V|6 V",label:"⑤",why:String.raw`完整方程式解得 \(V_o=6\,V\)，且在 \(\pm15\,V\) 電源範圍內。`}
     ],
     model:String.raw`理想運算放大器在線性負回授區，輸入電流為零。同相端的 \(1\,\mathrm{k}\Omega\) 無壓降，因此 {{0}}。令回授電阻與 4 V 電池之間節點為 \(V_x\)，依電池極性有 {{1}}。`,
-    derivation:String.raw`<b>步驟 1：反相端 KCL</b><br>{{2}}。<br><br><b>步驟 2：代數消去與數值代入（完整保留）</b>\[\frac{4-[V_o-4]}{1\,\mathrm{k}\Omega}=2\,\mathrm{mA}\]\[\frac{8-V_o}{1\,\mathrm{k}\Omega}=2\,\mathrm{mA}\]\[{{3}}\]<b>步驟 3：工程檢查</b><br>所得輸出必須落在 \(-15\,\mathrm{V}<V_o<15\,\mathrm{V}\)，線性假設才成立。<br><br><b>步驟 4：目標指標</b>\[V_o={{4}}\]故選 B。`,
+    derivation:String.raw`<b>步驟 1：反相端 KCL</b><br>{{2}}。<br><br><b>步驟 2：代數消去與數值代入（完整保留）</b>\[\frac{4-[V_o-4]}{1\,\mathrm{k}\Omega}=2\,\mathrm{mA}\]\[\frac{8-V_o}{1\,\mathrm{k}\Omega}=2\,\mathrm{mA}\]\[{{3}}\]<b>步驟 3：工程檢查</b><br>所得輸出必須落在 \(-15\,\mathrm{V}\lt V_o\lt 15\,\mathrm{V}\)，線性假設才成立。<br><br><b>步驟 4：目標指標</b>\[V_o={{4}}\]故選 B。`,
     self:"若忽略回授支路中的 4 V 電池，答案會差多少？這說明 KVL 中電源極性為何不能只靠圖形位置猜測？",
     challenge:String.raw`若回授電池改為 2 V，其他元件不變，求 \(V_o\)。<br><b>第一步提示：</b>先依新極性寫出 \(V_o-V_x=2\,\mathrm{V}\)。`
   },
@@ -70,7 +70,7 @@ const chapter2Questions = {
       {a:"12V|12 V",label:"⑤",why:String.raw`完整代入得到 \(v_o=12\,V\)，未超過正電源 15 V。`}
     ],
     model:String.raw`假設理想運放在線性負回授區。先分析同相端；其 KCL 可寫成 {{0}}，所以 \(v_+={{1}}\)。由虛短得 {{2}}。`,
-    derivation:String.raw`<b>步驟 1：反相端 KCL</b><br>{{3}}。<br><br><b>步驟 2：純數值運算完整保留</b>\[\frac{-3-1}{30\,\mathrm{k}\Omega}+\frac{-2-1}{20\,\mathrm{k}\Omega}+\frac{2-1}{10\,\mathrm{k}\Omega}+\frac{v_o-1}{60\,\mathrm{k}\Omega}=0\]\[-\frac{4}{30}-\frac{3}{20}+\frac{1}{10}+\frac{v_o-1}{60}=0\]\[-8-9+6+v_o-1=0\]\[v_o-12=0\]<b>步驟 3：工程檢查</b><br>因 \(-15\,\mathrm{V}<12\,\mathrm{V}<15\,\mathrm{V}\)，未飽和，虛短假設自洽。<br><br><b>步驟 4：目標指標</b>\[v_o={{4}}\]故選 A。`,
+    derivation:String.raw`<b>步驟 1：反相端 KCL</b><br>{{3}}。<br><br><b>步驟 2：純數值運算完整保留</b>\[\frac{-3-1}{30\,\mathrm{k}\Omega}+\frac{-2-1}{20\,\mathrm{k}\Omega}+\frac{2-1}{10\,\mathrm{k}\Omega}+\frac{v_o-1}{60\,\mathrm{k}\Omega}=0\]\[-\frac{4}{30}-\frac{3}{20}+\frac{1}{10}+\frac{v_o-1}{60}=0\]\[-8-9+6+v_o-1=0\]\[v_o-12=0\]<b>步驟 3：工程檢查</b><br>因 \(-15\,\mathrm{V}\lt 12\,\mathrm{V}\lt 15\,\mathrm{V}\)，未飽和，虛短假設自洽。<br><br><b>步驟 4：目標指標</b>\[v_o={{4}}\]故選 A。`,
     self:"為什麼不能把同相端三個電阻直接忽略？請說明它們如何先決定虛短所固定的反相端參考電壓。",
     challenge:String.raw`若同相端的 \(+1\,\mathrm{V}\) 改為 \(0\,\mathrm{V}\)，其他條件不變，求新的輸出。<br><b>第一步提示：</b>先重新計算同相節點的電導加權平均。`
   },
