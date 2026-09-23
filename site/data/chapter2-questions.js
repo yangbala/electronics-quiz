@@ -137,8 +137,10 @@ const chapter2Questions = {
   };
   const replace=html=>html.replace(/\{\{(\d+)\}\}/g,(_,i,offset)=>{
     const n=Number(i), item=q.blanks[n];
-    const markup=n>=limit()?`<strong>\\(${item.a.split("|")[0]}\\)</strong>`:`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;
     const context=mathContext(html,offset);
+    const answer=item.a.split("|")[0];
+    if(n>=limit())return context?`\\boxed{${answer}}`:`<strong>\\(${answer}\\)</strong>`;
+    const markup=`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;
     if(context==="inline")return `\\)${markup}\\(`;
     if(context==="display")return `\\]${markup}\\[`;
     return markup;

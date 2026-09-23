@@ -59,7 +59,8 @@ assert(index.includes('src="data/chapter5-clt-batch1.js?v=5"'), "data/chapter5-c
 assert(index.includes('src="data/chapter5-clt-batch2.js?v=4"'), "data/chapter5-clt-batch2.js is not loaded");
 assert(index.includes('src="data/chapter5-clt-batch3.js?v=2"'), "data/chapter5-clt-batch3.js is not loaded");
 assert(index.includes('src="data/chapter5-questions.js?v=3"'), "data/chapter5-questions.js is not loaded");
-assert(index.includes('src="data/chapter2-questions.js?v=4"'), "data/chapter2-questions.js is not loaded");
+assert(index.includes('src="data/chapter2-questions.js?v=5"'), "data/chapter2-questions.js is not loaded");
+assert(fs.readFileSync(path.join(root,"data","chapter2-questions.js"),"utf8").includes('if(n>=limit())return context?`\\\\boxed{${answer}}`'),"Chapter 2 revealed answers must stay inside their current LaTeX formula");
 assert(index.includes('src="data/chapter6-questions.js?v=2"'), "data/chapter6-questions.js is not loaded");
 assert(index.includes('src="data/chapter7-questions.js?v=3"'), "data/chapter7-questions.js is not loaded");
 assert(index.includes('src="data/chapter3-questions.js?v=6"'), "data/chapter3-questions.js is not loaded");
