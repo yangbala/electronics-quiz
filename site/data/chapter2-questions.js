@@ -115,7 +115,7 @@ const chapter2Questions = {
       {a:"4",label:"⑤",why:String.raw`由 \(8=2R_f/R\) 得 \(R_f/R=4\)。`}
     ],
     model:String.raw`理想運放工作在線性負回授區。同相端是無負載分壓器，因此 {{0}}，並有 {{1}}。`,
-    derivation:String.raw`<b>步驟 1：反相端 KCL</b><br>{{2}}。<br><br><b>步驟 2：代數消去（完整保留）</b>\[R_f(1-v_-)+R(v_o-v_-)=0\]\[Rv_o=(R+R_f)v_- -R_f\]\[v_o=\left(1+\frac{R_f}{R}\right)v_- -\frac{R_f}{R}\]\[v_o=\left(1+\frac{R_f}{R}\right)\frac{3R_f}{R+R_f}-\frac{R_f}{R}\]\[v_o=\frac{3R_f}{R}-\frac{R_f}{R}={{3}}\]<b>步驟 3：工程檢查</b><br>若 \(R_f/R=4\)，則 \(v_+=3\times4/5=2.4\,\mathrm{V}\)，而 \(v_o=8\,\mathrm{V}\) 仍在 \(\pm15\,\mathrm{V}\) 內。<br><br><b>步驟 4：目標指標</b>\[8=2\frac{R_f}{R}\quad\Rightarrow\quad\frac{R_f}{R}={{4}}\]故選 A。`,
+    derivation:String.raw`<b>步驟 1：反相端 KCL</b><br>{{2}}。<br><br><b>步驟 2：代數消去（完整保留）</b>\[R_f(1-v_-)+R(v_o-v_-)=0\]\[Rv_o=(R+R_f)v_- -R_f\]\[v_o=\left(1+\frac{R_f}{R}\right)v_- -\frac{R_f}{R}\]\[v_o=\left(1+\frac{R_f}{R}\right)\frac{3R_f}{R+R_f}-\frac{R_f}{R}\]\[v_o=\frac{3R_f}{R}-\frac{R_f}{R}={{3}}\]<b>步驟 3：工程檢查</b><br>若 \(R_f/R=4\)，則 \(v_+=3\times4/5=2.4\,\mathrm{V}\)，而 \(v_o=8\,\mathrm{V}\) 仍在 \(\pm15\,\mathrm{V}\) 內。<br><br><b>步驟 4：目標指標</b><div class="equationLine"><span>\(8=2\dfrac{R_f}{R}\Rightarrow\dfrac{R_f}{R}=\)</span>{{4}}</div>故選 A。`,
     self:String.raw`本電路為何會得到 \(v_o=(R_f/R)(3-1)\)，但前提是同相端也使用相同比例的 R 與 \(R_f\)？`,
     challenge:String.raw`若反相端輸入改為 2 V、同相端仍為 3 V，且 \(R_f/R=4\)，求輸出。<br><b>第一步提示：</b>先保留同相端分壓式，再以反相端 KCL 代入新的 2 V。`
   }
@@ -139,7 +139,9 @@ const chapter2Questions = {
     const n=Number(i), item=q.blanks[n];
     const context=mathContext(html,offset);
     const answer=item.a.split("|")[0];
-    if(n>=limit())return context?`\\boxed{${answer}}`:`<strong>\\(${answer}\\)</strong>`;
+    const before=html.slice(0,offset).trimEnd();
+    const shown=context&&/=\s*$/.test(before)&&answer.includes("=")?answer.slice(answer.lastIndexOf("=")+1):answer;
+    if(n>=limit())return context?`\\boxed{${shown}}`:`<strong>\\(${answer}\\)</strong>`;
     const markup=`<span class="cltBlank"><span class="blankRef">${item.label}</span>[ <input class="blank wide" data-answer="${item.a}" aria-label="填空 ${item.label}" autocomplete="off"> ]</span>`;
     if(context==="inline")return `\\)${markup}\\(`;
     if(context==="display")return `\\]${markup}\\[`;
