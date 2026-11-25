@@ -24,6 +24,10 @@ for (const question of questions) {
   assert(question.answer === "bonus" ||
     (Array.isArray(question.answer) && question.answer.length && question.answer.every(value => /^[ABCD]$/.test(value))),
     question.id + " missing official answer");
+  if (question.crop) {
+    const crop = path.join(site, "assets", "question-crops", question.id + ".webp");
+    assert(fs.statSync(crop).size > 0, question.id + " missing crop");
+  }
   const { source, page } = question;
   for (const asset of [source + ".pdf", source + "-answers.pdf", source + "-p" + page + ".webp"]) {
     if (seenAssets.has(asset)) continue;
@@ -41,7 +45,7 @@ const pages = ["index.html", "quiz.html", "question.html", "exams-108-110.html",
   ...Object.keys(chapters).map(number => "chapters/chapter-" + number + ".html")];
 for (const page of pages) {
   const markup = read(page);
-  const scripts = [...markup.matchAll(/<script\s+src="([^"]+)"/g)].map(result => result[1]);
+  const scripts = [...markup.matchAll(/<script\s+src="([^"]+)"/g)].map(result => result[1].split("?")[0]);
   assert.deepEqual(scripts.map(script => path.basename(script)), ["level-one-bank.js", "level-one.js"], page);
   for (const script of scripts) assert(read(path.join(path.dirname(page), script)), page + ": " + script);
 }

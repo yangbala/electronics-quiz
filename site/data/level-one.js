@@ -75,13 +75,13 @@
     const position = list.findIndex(item => item.id === q.id);
     const ref = "assets/exam-sources/" + q.source;
     document.title = label(q) + "｜電子學題庫";
-    const preview = `${ref}-p${q.page}.webp`;
+    const preview = q.crop ? "assets/question-crops/" + q.id + ".webp" : `${ref}-p${q.page}.webp`;
     main.innerHTML = `<a class="back" href="${back}">← 返回題目列表</a>
       <h1>${label(q)}</h1><p>${sources[q.source].title}・等級一${q.chapter ? "・第 " + q.chapter + " 章 " + chapters[q.chapter] : ""}</p>
       ${q.topic ? `<p>${escape(q.topic)}</p>` : ""}
-      <article class="paper"><p>請看原卷第 ${q.page} 頁的第 ${q.number} 題。跨頁題及共用題幹可在試題本查看。</p>
+      <article class="paper">${q.crop ? "" : `<p>請看原卷第 ${q.page} 頁的第 ${q.number} 題。跨頁題及共用題幹可在試題本查看。</p>`}
         <a href="${ref}.pdf#page=${q.page}" target="_blank" rel="noopener">開啟原始試題本第 ${q.page} 頁</a>
-        <img src="${preview}" alt="${label(q)}所在的官方試卷第 ${q.page} 頁">
+        <img src="${preview}" alt="${label(q)}${q.crop ? "原題裁圖" : "所在的官方試卷第 " + q.page + " 頁"}">
       </article>
       <form aria-label="等級一選擇題">
         <fieldset><legend>選擇答案</legend><div class="choices">${[..."ABCD"].map(letter =>
